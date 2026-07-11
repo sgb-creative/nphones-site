@@ -88,6 +88,7 @@ def page(title, desc, kicker, h1, sub, body, cta_href="contact.html"):
     </div>
   </div>
 </footer>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
 <script src="assets/main.js"></script>
 </body>
 </html>

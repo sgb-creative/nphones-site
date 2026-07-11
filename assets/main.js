@@ -6,6 +6,29 @@
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   document.documentElement.classList.add(reduced ? 'reduced-motion' : 'js');
 
+  /* ---------- smooth inertia scrolling (Lenis) ---------- */
+  if (!reduced && typeof Lenis !== 'undefined' && matchMedia('(pointer: fine)').matches) {
+    document.documentElement.style.scrollBehavior = 'auto';
+    var lenis = new Lenis({
+      lerp: 0.075,
+      wheelMultiplier: 0.85,
+      smoothWheel: true
+    });
+    (function lenisRaf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(lenisRaf);
+    })(performance.now());
+    document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        var id = a.getAttribute('href');
+        if (id.length > 1 && document.querySelector(id)) {
+          e.preventDefault();
+          lenis.scrollTo(id, { offset: -100, duration: 1.4 });
+        }
+      });
+    });
+  }
+
   /* ---------- typewriter hero ---------- */
   var tw = document.getElementById('typewriter');
   if (tw) {
