@@ -7,9 +7,16 @@
   document.documentElement.classList.add(reduced ? 'reduced-motion' : 'js');
 
   /* start reloads at the top — the animated hero replays, so restored
-     scroll offsets would strand the headline under the fixed header */
+     scroll offsets would strand the headline under the fixed header.
+     Mobile Chrome can restore scroll after initial script execution,
+     so re-assert on load and pageshow too. */
   if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-  if (!location.hash) window.scrollTo(0, 0);
+  function toTop() {
+    if (!location.hash) window.scrollTo(0, 0);
+  }
+  toTop();
+  window.addEventListener('load', function () { setTimeout(toTop, 0); });
+  window.addEventListener('pageshow', function () { setTimeout(toTop, 0); });
 
   /* ---------- smooth inertia scrolling (Lenis) ---------- */
   if (!reduced && typeof Lenis !== 'undefined' && matchMedia('(pointer: fine)').matches) {
