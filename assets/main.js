@@ -330,7 +330,15 @@
     })(lastT);
   }
 
-  /* ---------- static form placeholder + conditional segments ---------- */
+  /* ---------- demo form: conditional segments + submission ----------
+     To receive leads by email:
+     1. Create a free form at https://formspree.io (Forms → New form,
+        set the recipient to contact@nphones.com or your inbox)
+     2. Copy the form ID and paste the full endpoint below, e.g.
+        FORM_ENDPOINT = 'https://formspree.io/f/xanyzabc';
+     3. git push — done. Leads arrive as emails with all form fields. */
+  var FORM_ENDPOINT = '';
+
   document.querySelectorAll('form[data-static]').forEach(function (f) {
     var org = f.querySelector('select[name="orgtype"]');
     if (org) {
@@ -348,7 +356,28 @@
     f.addEventListener('submit', function (e) {
       e.preventDefault();
       var note = f.parentElement.querySelector('.form-note');
-      if (note) note.textContent = 'Form wiring pending — connect your CRM or email endpoint here before launch.';
+      var btn = f.querySelector('button[type="submit"]');
+      if (!FORM_ENDPOINT) {
+        if (note) note.textContent = 'Form wiring pending — add your Formspree endpoint in assets/main.js.';
+        return;
+      }
+      var data = new FormData(f);
+      data.append('_subject', 'New demo request — nphones.com');
+      if (btn) { btn.disabled = true; btn.textContent = 'Sending…'; }
+      fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      }).then(function (res) {
+        if (res.ok) {
+          f.reset();
+          if (note) note.textContent = 'Thank you — we’ll be in touch within 24 hours.';
+          if (btn) { btn.textContent = 'Request sent ✓'; }
+        } else { throw new Error('bad status'); }
+      }).catch(function () {
+        if (note) note.textContent = 'Something went wrong — email us directly at contact@nphones.com.';
+        if (btn) { btn.disabled = false; btn.textContent = 'Request a demo'; }
+      });
     });
   });
 })();
