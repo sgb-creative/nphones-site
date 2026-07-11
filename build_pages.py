@@ -77,7 +77,7 @@ def page(title, desc, kicker, h1, sub, body, cta_href="contact.html"):
         <li><a href="contact.html">Contact</a></li>
       </ul></div>
       <div><h4>Account</h4><ul>
-        <li><a href="#">Log in</a></li>
+        <li><a href="https://app.nphones.com/login">Log in</a></li>
         <li><a href="privacy.html">Privacy</a></li>
         <li><a href="terms.html">Terms</a></li>
       </ul></div>
