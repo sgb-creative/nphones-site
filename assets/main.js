@@ -337,7 +337,7 @@
      2. Copy the form ID and paste the full endpoint below, e.g.
         FORM_ENDPOINT = 'https://formspree.io/f/xanyzabc';
      3. git push — done. Leads arrive as emails with all form fields. */
-  var FORM_ENDPOINT = '';
+  var FORM_ENDPOINT = 'https://formspree.io/f/mrenzbgz';
 
   document.querySelectorAll('form[data-static]').forEach(function (f) {
     var org = f.querySelector('select[name="orgtype"]');
