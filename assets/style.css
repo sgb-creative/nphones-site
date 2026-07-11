@@ -1,7 +1,7 @@
 /* ============================================================
    NPhones — design system
    Palette: Ink #080808 · Forest #304C27 · Leaf #84AF72
-            Sage #CFE0C2 · Mint #F0F7EC
+            Sage #CFE0C2 · Mint #F0F7EC · Cream #F7F0EC (warm counterpoint)
    Type:    Conthrax (logo, H1/H2) · Inter (everything else)
    Language: green glass — glassmorphism, blobs, everything rounded
    ============================================================ */
@@ -18,6 +18,7 @@
   --leaf: #84AF72;
   --sage: #CFE0C2;
   --mint: #F0F7EC;
+  --cream: #F7F0EC;
   --white: #ffffff;
 
   --font-display: 'Conthrax', 'Michroma', sans-serif;
@@ -175,9 +176,9 @@ img, svg { display: block; }
     0 10px 26px -4px rgba(132, 175, 114, 0.7);
 }
 
-/* secondary — near-clear glass */
+/* secondary — near-clear warm glass */
 .btn-glass, .btn-light {
-  background: rgba(240, 247, 236, 0.45);
+  background: rgba(247, 240, 236, 0.45);
   color: var(--forest);
   border: 1.5px solid rgba(48, 76, 39, 0.45);
   box-shadow:
@@ -186,7 +187,7 @@ img, svg { display: block; }
     0 16px 40px -6px rgba(207, 224, 194, 0.8);
 }
 .btn-glass:hover, .btn-light:hover {
-  background: rgba(226, 238, 218, 0.55);
+  background: rgba(238, 228, 222, 0.55);
   box-shadow:
     inset 0 1px 1px rgba(255, 255, 255, 0.5),
     0 8px 22px -2px rgba(207, 224, 194, 0.8),
@@ -263,7 +264,10 @@ img, svg { display: block; }
   overflow: hidden;
   background: var(--white);
 }
-.section-tint { background: linear-gradient(180deg, #FBFDF9 0%, var(--mint) 100%); }
+.section-tint { background: linear-gradient(180deg, #FFFFFF 0%, var(--cream) 100%); }
+/* 50/50 temperature rhythm — JS alternates these down each page */
+.section-cool-auto { background: linear-gradient(180deg, #FFFFFF 0%, var(--mint) 100%); }
+.section-warm-auto { background: linear-gradient(180deg, #FFFFFF 0%, var(--cream) 100%); }
 .section-dark { background: var(--ink); color: var(--mint); }
 .section-forest { background: var(--forest); color: var(--mint); }
 .section-inner { position: relative; z-index: 2; padding: clamp(3.2rem, 7vw, 5.5rem) clamp(1.4rem, 5vw, 4.5rem); }
@@ -280,6 +284,8 @@ img, svg { display: block; }
 .blob.leaf   .blob-inner { background: var(--leaf); opacity: 0.5; }
 .blob.sage   .blob-inner { background: var(--sage); opacity: 0.85; }
 .blob.forest .blob-inner { background: var(--forest); opacity: 0.22; }
+.blob.cream  .blob-inner { background: var(--cream); opacity: 0.95; }
+.section-dark .blob.cream .blob-inner, .section-forest .blob.cream .blob-inner { opacity: 0.12; }
 .section-dark .blob.leaf   .blob-inner { opacity: 0.3; }
 .section-dark .blob.sage   .blob-inner { opacity: 0.16; }
 .section-dark .blob.forest .blob-inner { background: var(--leaf); opacity: 0.2; }
@@ -574,9 +580,9 @@ img, svg { display: block; }
   min-width: 0;
   padding: 14px 18px;
   border-radius: var(--r-pill);
-  border: 1px solid rgba(240, 247, 236, 0.28);
-  background: rgba(255, 255, 255, 0.14);
-  color: var(--mint);
+  border: 1px solid rgba(247, 240, 236, 0.3);
+  background: rgba(247, 240, 236, 0.16);
+  color: var(--cream);
   outline: none;
   transition: border-color var(--dur) ease, background var(--dur) ease;
 }
@@ -587,9 +593,9 @@ img, svg { display: block; }
   min-width: 0;
   padding: 14px 18px;
   border-radius: var(--r-pill);
-  border: 1px solid rgba(240, 247, 236, 0.28);
-  background-color: rgba(255, 255, 255, 0.14);
-  color: var(--mint);
+  border: 1px solid rgba(247, 240, 236, 0.3);
+  background-color: rgba(247, 240, 236, 0.16);
+  color: var(--cream);
   transition: border-color var(--dur) ease, background var(--dur) ease;
 }
 .cta-form select {
@@ -627,9 +633,9 @@ img, svg { display: block; }
 .footer h4 { font-size: 13px; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(240, 247, 236, 0.5); margin-bottom: 0.9rem; }
 .footer ul { list-style: none; }
 .footer ul a { display: inline-block; font-size: 14.5px; font-weight: 400; color: rgba(240, 247, 236, 0.8); padding: 4px 0; transition: color var(--dur) ease; }
-.footer ul a:hover { color: var(--leaf); }
+.footer ul a:hover { color: var(--cream); }
 .footer .wordmark { font-family: var(--font-display); font-size: 22px; }
-.footer .tagline { font-size: 14px; color: var(--leaf); font-weight: 400; margin-top: 8px; }
+.footer .tagline { font-size: 14px; color: var(--cream); font-weight: 400; margin-top: 8px; }
 .footer-bottom {
   display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;
   border-top: 1px solid rgba(240, 247, 236, 0.12);

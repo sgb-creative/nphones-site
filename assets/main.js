@@ -29,6 +29,29 @@
     });
   }
 
+  /* ---------- 50/50 temperature rhythm: alternate cool/warm light sections ---------- */
+  (function () {
+    var i = 0;
+    document.querySelectorAll('.section').forEach(function (sec) {
+      if (sec.classList.contains('section-dark') || sec.classList.contains('section-forest')) return;
+      sec.classList.remove('section-tint');
+      sec.classList.add(i % 2 === 0 ? 'section-cool-auto' : 'section-warm-auto');
+      /* warm sections get a cream blob companion */
+      if (i % 2 === 1) {
+        var blobs = sec.querySelector('.blobs');
+        if (blobs) {
+          var b = document.createElement('div');
+          b.className = 'blob cream';
+          b.dataset.depth = '0.06';
+          b.style.cssText = 'width:300px;height:300px;top:35%;left:52%;';
+          b.innerHTML = '<div class="blob-inner"></div>';
+          blobs.appendChild(b);
+        }
+      }
+      i++;
+    });
+  })();
+
   /* ---------- typewriter hero ---------- */
   var tw = document.getElementById('typewriter');
   if (tw) {
