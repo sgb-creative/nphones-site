@@ -389,6 +389,8 @@ img, svg { display: block; }
 .phone-link:hover .phone-cta { background: rgba(226, 238, 218, 0.9); }
 .js .phone-cta { opacity: 0; visibility: hidden; transition: opacity 0.8s ease 0.5s, visibility 0s 1.3s; }
 .js .phone-cta.show { opacity: 1; visibility: visible; transition: opacity 0.8s ease 0.5s, visibility 0s; }
+.js .hero .phone-stage { opacity: 0; transform: translateY(34px) scale(0.96); transition: opacity 0.9s ease 0.15s, transform 0.9s var(--ease-spring) 0.15s; }
+.js .hero .phone-stage.show { opacity: 1; transform: none; }
 .phone {
   position: relative;
   width: min(300px, 72vw);
@@ -691,6 +693,7 @@ img, svg { display: block; }
   /* hero content visible immediately on mobile — no empty void during typewriter */
   .js .hero-sub, .js .hero-ctas, .js .hero-note { opacity: 1; }
   .js .phone-cta { opacity: 1; visibility: visible; }
+  .js .hero .phone-stage { opacity: 1; transform: none; }
   .nav-burger {
     display: flex; align-items: center; justify-content: center;
     width: 42px; height: 42px; border-radius: var(--r-pill);

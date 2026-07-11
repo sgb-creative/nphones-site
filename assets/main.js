@@ -16,7 +16,7 @@
     function heroSettle() {
       var l2 = document.querySelector('.hero h1 .line2');
       if (l2) l2.classList.add('show');
-      ['.hero-sub', '.hero-ctas', '.hero-note', '.phone-cta'].forEach(function (s) {
+      ['.hero-sub', '.hero-ctas', '.hero-note', '.phone-cta', '.phone-stage'].forEach(function (s) {
         var el = document.querySelector(s);
         if (el) el.classList.add('show');
       });
