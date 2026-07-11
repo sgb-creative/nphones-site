@@ -275,8 +275,21 @@
     })(lastT);
   }
 
-  /* ---------- static form placeholder ---------- */
+  /* ---------- static form placeholder + conditional segments ---------- */
   document.querySelectorAll('form[data-static]').forEach(function (f) {
+    var org = f.querySelector('select[name="orgtype"]');
+    if (org) {
+      var subs = f.querySelectorAll('select[data-org]');
+      function updSegs() {
+        subs.forEach(function (s) {
+          var active = s.dataset.org === org.value;
+          s.hidden = !active;
+          if (!active) s.selectedIndex = 0;
+        });
+      }
+      org.addEventListener('change', updSegs);
+      updSegs();
+    }
     f.addEventListener('submit', function (e) {
       e.preventDefault();
       var note = f.parentElement.querySelector('.form-note');

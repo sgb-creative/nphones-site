@@ -563,11 +563,12 @@ img, svg { display: block; }
   margin: 2.2rem auto 0;
   max-width: 720px;
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
   padding: 18px;
   text-align: left;
 }
+.cta-form .full { grid-column: 1 / -1; }
 .cta-form input {
   font-family: var(--font-body); font-size: 14px; font-weight: 400;
   min-width: 0;
@@ -579,8 +580,37 @@ img, svg { display: block; }
   outline: none;
   transition: border-color var(--dur) ease, background var(--dur) ease;
 }
-.cta-form input::placeholder { color: rgba(240, 247, 236, 0.6); }
-.cta-form input:focus { border-color: var(--leaf); background: rgba(255, 255, 255, 0.2); }
+.cta-form input::placeholder, .cta-form textarea::placeholder { color: rgba(240, 247, 236, 0.6); }
+.cta-form input:focus, .cta-form select:focus, .cta-form textarea:focus { border-color: var(--leaf); background: rgba(255, 255, 255, 0.2); outline: none; }
+.cta-form select, .cta-form textarea {
+  font-family: var(--font-body); font-size: 14px; font-weight: 400;
+  min-width: 0;
+  padding: 14px 18px;
+  border-radius: var(--r-pill);
+  border: 1px solid rgba(240, 247, 236, 0.28);
+  background-color: rgba(255, 255, 255, 0.14);
+  color: var(--mint);
+  transition: border-color var(--dur) ease, background var(--dur) ease;
+}
+.cta-form select {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23CFE0C2' stroke-width='2' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 18px center;
+  padding-right: 42px;
+  cursor: pointer;
+}
+.cta-form select option { color: var(--ink); background: var(--mint); }
+.cta-form select:invalid { color: rgba(240, 247, 236, 0.6); }
+.cta-form textarea { border-radius: 24px; min-height: 96px; resize: vertical; }
+.consent {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 12.5px; font-weight: 400; color: rgba(240, 247, 236, 0.75);
+  cursor: pointer;
+}
+.consent input { width: 16px; height: 16px; margin-top: 2px; flex-shrink: 0; accent-color: var(--leaf); cursor: pointer; }
+.consent a { color: var(--sage); font-weight: 600; text-decoration: underline; }
 .cta-form .btn {
   grid-column: 1 / -1;
   justify-content: center;

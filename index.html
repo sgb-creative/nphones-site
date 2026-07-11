@@ -300,10 +300,36 @@
     <h2 style="max-width:22ch;margin-inline:auto">Give your team their phones. On one device.</h2>
     <p style="margin:1rem auto 0;max-width:52ch;color:rgba(240,247,236,.75)">Tell us about your workforce and we'll show you a live NPhones deployment — from console to a working business phone in minutes.</p>
     <form class="glass cta-form" data-static>
-      <input type="text" name="name" placeholder="Full name" aria-label="Full name" required>
-      <input type="email" name="email" placeholder="Work email" aria-label="Work email" required>
-      <input type="text" name="org" placeholder="Organization" aria-label="Organization" required>
-      <button class="btn btn-light" type="submit">Request a demo</button>
+      <input type="text" name="first_name" placeholder="First name *" aria-label="First name" required>
+      <input type="text" name="last_name" placeholder="Last name *" aria-label="Last name" required>
+      <input type="email" name="email" placeholder="Work email *" aria-label="Work email" required>
+      <input type="tel" name="phone" placeholder="Phone" aria-label="Phone">
+      <input type="text" name="company" placeholder="Company *" aria-label="Company" required>
+      <input type="text" name="job_title" placeholder="Job title" aria-label="Job title">
+      <select name="orgtype" aria-label="Organization type" required>
+        <option value="" disabled selected>Organization type *</option>
+        <option value="commercial">Commercial</option>
+        <option value="government">Government &amp; Defense</option>
+      </select>
+      <select name="workforce" aria-label="Workforce size">
+        <option value="" disabled selected>Workforce size</option>
+        <option>1–50</option><option>51–200</option><option>201–1,000</option><option>1,001–5,000</option><option>5,000+</option>
+      </select>
+      <select name="segment_commercial" data-org="commercial" aria-label="Industry" class="full" hidden>
+        <option value="" disabled selected>Industry</option>
+        <option>Financial services &amp; insurance</option><option>Healthcare &amp; home care</option><option>Logistics &amp; field services</option><option>Retail, hospitality &amp; franchise</option><option>Construction &amp; property</option><option>Other</option>
+      </select>
+      <select name="segment_government" data-org="government" aria-label="Sector" class="full" hidden>
+        <option value="" disabled selected>Sector</option>
+        <option>Civilian government</option><option>Defense</option><option>Critical infrastructure</option><option>Emergency services</option><option>Other</option>
+      </select>
+      <select name="source" aria-label="How did you hear about us?" class="full">
+        <option value="" disabled selected>How did you hear about us?</option>
+        <option>Search engine</option><option>LinkedIn</option><option>Referral</option><option>Partner</option><option>Event or webinar</option><option>Press</option><option>Other</option>
+      </select>
+      <textarea name="message" placeholder="Tell us about your workforce and what you'd like to see" aria-label="Message" class="full"></textarea>
+      <label class="consent full"><input type="checkbox" name="consent" required> I agree to the <a href="privacy.html">privacy policy</a>.</label>
+      <button class="btn btn-light full" type="submit">Request a demo</button>
     </form>
     <p class="form-note">We reply within 24 hours. Android today, iOS on the roadmap.</p>
   </div>
