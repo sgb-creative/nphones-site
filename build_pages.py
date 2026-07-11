@@ -2,8 +2,8 @@
 """Generate NPhones subpages from a shared template."""
 import os
 
-LOGO_SVG = '''<svg width="32" height="40" viewBox="0 0 102 130" aria-hidden="true"><rect x="10" y="10" width="50" height="78" rx="16" fill="#CFE0C2"/><rect x="24" y="24" width="52" height="82" rx="16" fill="#84AF72"/><rect x="38" y="40" width="54" height="86" rx="16" fill="#304C27"/><rect x="46" y="50" width="38" height="66" rx="8" fill="#F0F7EC"/></svg>'''
-FOOT_SVG = LOGO_SVG.replace('width="32" height="40"', 'width="24" height="30"').replace('fill="#304C27"', 'fill="#F0F7EC"', 1)
+LOGO_SVG = '''<svg width="30" height="42" viewBox="8 8 86 120" aria-hidden="true"><rect x="10" y="10" width="50" height="78" rx="16" fill="#CFE0C2"/><rect x="24" y="24" width="52" height="82" rx="16" fill="#84AF72"/><rect x="38" y="40" width="54" height="86" rx="16" fill="#304C27"/><rect x="46" y="50" width="38" height="66" rx="8" fill="#F0F7EC"/></svg>'''
+FOOT_SVG = LOGO_SVG.replace('width="30" height="42"', 'width="24" height="34"').replace('fill="#304C27"', 'fill="#F0F7EC"', 1)
 
 def blob(kind, depth, style):
     return f'<div class="blob {kind}" data-depth="{depth}" style="{style}"><div class="blob-inner"></div></div>'
