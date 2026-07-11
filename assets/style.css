@@ -691,6 +691,12 @@ img, svg { display: block; }
   .nav-cta { display: none; }
   .menu-cta { display: block; margin-top: 6px; }
   .menu-cta .btn { width: 100%; justify-content: center; }
+  /* halo gets clipped by the menu's overflow — keep only inner glass shading here */
+  .menu-cta .btn,
+  .menu-cta .btn:hover,
+  .menu-cta .btn:active {
+    box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.35);
+  }
   /* hero content visible immediately on mobile — no empty void during typewriter */
   .js .hero-sub, .js .hero-ctas, .js .hero-note { opacity: 1; }
   .js .phone-cta { opacity: 1; visibility: visible; }
