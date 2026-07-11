@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Demo — NPhones</title>
+<meta name="description" content="Try the NPhones experience: open the app on an Android phone and step into a complete cloud business phone.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/style.css">
+<style>
+  body { display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+  .demo-top {
+    width: min(1240px, calc(100% - 1.6rem));
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 0.4rem;
+    flex-wrap: wrap; gap: 10px;
+  }
+  .demo-top a { font-weight: 600; font-size: 14px; color: var(--forest); }
+  .demo-top .hint { font-size: 13px; color: rgba(8,8,8,.55); }
+  .demo-stage { position: relative; flex: 1; display: flex; align-items: center; justify-content: center; padding-bottom: 2rem; width: 100%; }
+  .demo-blobs { position: fixed; inset: 0; z-index: -1; overflow: hidden; }
+
+  .dphone {
+    position: relative;
+    width: min(380px, 94vw);
+    height: min(800px, calc(100vh - 130px));
+    min-height: 560px;
+    background: #101210;
+    border-radius: 52px;
+    padding: 11px;
+    box-shadow: 0 30px 80px rgba(8,8,8,.4), inset 0 0 0 2px #2a2d2a;
+  }
+  .dscreen {
+    position: relative; width: 100%; height: 100%;
+    border-radius: 42px; overflow: hidden;
+    background: linear-gradient(160deg, #F0F7EC 0%, #CFE0C2 60%, #a9c599 100%);
+  }
+  .dnotch { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); width: 13px; height: 13px; border-radius: 50%; background: #101210; z-index: 30; }
+
+  .os {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column;
+    transition: opacity .5s ease, transform .5s ease;
+  }
+  .os.hidden { opacity: 0; transform: scale(1.04); pointer-events: none; }
+  .os-work .dwall { position: absolute; inset: 0; background: linear-gradient(165deg, #24361d 0%, #304C27 55%, #52734a 100%); }
+  .os-work { color: var(--mint); }
+
+  .dstatus {
+    position: relative; z-index: 2;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 16px 24px 4px;
+    font-size: 12px; font-weight: 600;
+  }
+  .dbanner {
+    position: relative; z-index: 2;
+    margin: 12px 16px 2px;
+    display: flex; align-items: center; gap: 8px;
+    background: rgba(255,255,255,.55);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(48,76,39,.2);
+    border-radius: var(--r-pill);
+    padding: 8px 14px;
+    font-size: 11.5px; font-weight: 600; color: var(--forest);
+  }
+  .os-work .dbanner { background: rgba(255,255,255,.1); border-color: rgba(240,247,236,.25); color: var(--sage); }
+  .dbanner .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--leaf); box-shadow: 0 0 0 3px rgba(132,175,114,.3); }
+
+  .dapps {
+    position: relative; z-index: 2;
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 14px; padding: 20px;
+  }
+  .dapp {
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    background: none; border: none; cursor: pointer;
+    font-family: var(--font-body); font-size: 10px; font-weight: 600;
+    color: rgba(8,8,8,.75);
+    padding: 0;
+    transition: transform .25s var(--ease-spring);
+  }
+  .os-work .dapp { color: rgba(240,247,236,.85); }
+  .dapp:active { transform: scale(.88); }
+  .dapp .ic {
+    width: 54px; height: 54px; border-radius: 17px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; font-weight: 700; color: #fff;
+    box-shadow: 0 4px 10px rgba(8,8,8,.18);
+  }
+  .dapp.shake { animation: dshake .4s ease; }
+  @keyframes dshake { 0%,100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+
+  .ddock {
+    position: relative; z-index: 2;
+    margin: auto 14px 14px;
+    display: flex; justify-content: space-around;
+    background: rgba(255,255,255,.5);
+    backdrop-filter: blur(12px);
+    border-radius: 26px; padding: 12px;
+  }
+  .os-work .ddock { background: rgba(255,255,255,.12); }
+  .dhome { position: absolute; z-index: 3; bottom: 5px; left: 50%; transform: translateX(-50%); width: 100px; height: 4px; border-radius: 4px; background: rgba(8,8,8,.35); }
+  .os-work .dhome { background: rgba(240,247,236,.4); }
+
+  /* splash */
+  .dsplash {
+    position: absolute; inset: 0; z-index: 20;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px;
+    background: linear-gradient(165deg, #1c2a16, #304C27);
+    color: var(--mint);
+    opacity: 0; pointer-events: none;
+    transition: opacity .4s ease;
+  }
+  .dsplash.on { opacity: 1; pointer-events: auto; }
+  .dsplash .wordmark { font-family: var(--font-display); font-size: 22px; letter-spacing: .04em; }
+  .dsplash .msg { font-size: 12.5px; color: rgba(240,247,236,.7); }
+  .dbar { width: 140px; height: 5px; border-radius: 5px; background: rgba(240,247,236,.18); overflow: hidden; }
+  .dbar i { display: block; width: 0%; height: 100%; border-radius: 5px; background: var(--leaf); transition: width 1.1s ease; }
+  .dsplash.on .dbar i { width: 100%; }
+
+  /* files sheet */
+  .dsheet {
+    position: absolute; inset: 0; z-index: 25;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    background: rgba(8,8,8,.35);
+    opacity: 0; pointer-events: none;
+    transition: opacity .35s ease;
+  }
+  .dsheet.on { opacity: 1; pointer-events: auto; }
+  .dsheet-panel {
+    background: #F7FBF4;
+    border-radius: 30px 30px 40px 40px;
+    padding: 18px 18px 26px;
+    max-height: 72%;
+    overflow: auto;
+    transform: translateY(30px);
+    transition: transform .35s var(--ease-spring);
+    color: var(--ink);
+  }
+  .dsheet.on .dsheet-panel { transform: none; }
+  .dsheet-grip { width: 44px; height: 5px; border-radius: 5px; background: rgba(8,8,8,.2); margin: 0 auto 14px; }
+  .dsheet-panel h3 { font-family: var(--font-display); font-weight: 400; font-size: 15px; margin-bottom: 4px; }
+  .dsheet-panel .sub { font-size: 11.5px; color: rgba(8,8,8,.5); margin-bottom: 12px; }
+  .dfile {
+    display: flex; align-items: center; gap: 12px;
+    padding: 11px 10px;
+    border-radius: 14px;
+    font-size: 13px; font-weight: 400;
+  }
+  .dfile:hover { background: rgba(132,175,114,.14); }
+  .dfile .fic {
+    width: 36px; height: 36px; border-radius: 11px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 9px; font-weight: 700; color: #fff;
+  }
+  .dfile .meta { font-size: 10.5px; color: rgba(8,8,8,.45); }
+  .dlock { margin-top: 12px; text-align: center; font-size: 10.5px; color: rgba(8,8,8,.45); }
+
+  /* toast */
+  .dtoast {
+    position: absolute; bottom: 150px; left: 50%; transform: translateX(-50%) translateY(8px);
+    z-index: 28;
+    background: rgba(8,8,8,.85); color: var(--mint);
+    font-size: 12px; font-weight: 600;
+    padding: 10px 18px; border-radius: var(--r-pill);
+    opacity: 0; pointer-events: none;
+    transition: opacity .3s ease, transform .3s ease;
+    white-space: nowrap;
+  }
+  .dtoast.on { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+  .exit-pill {
+    position: absolute; z-index: 26; bottom: 96px; left: 50%; transform: translateX(-50%);
+    display: none;
+    background: rgba(8,8,8,.55); color: var(--mint);
+    border: 1px solid rgba(240,247,236,.3);
+    font-family: var(--font-body); font-size: 11px; font-weight: 600;
+    padding: 8px 16px; border-radius: var(--r-pill);
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+  }
+  .exit-pill.on { display: block; }
+</style>
+</head>
+<body>
+
+<div class="demo-blobs" aria-hidden="true">
+  <div class="blob leaf" data-depth="0.04" style="width:420px;height:420px;top:-120px;right:-80px;"><div class="blob-inner"></div></div>
+  <div class="blob sage" data-depth="0.03" style="width:380px;height:380px;bottom:-110px;left:-90px;"><div class="blob-inner"></div></div>
+</div>
+
+<div class="demo-top">
+  <a href="index.html">← Back to NPhones.com</a>
+  <span class="hint">Interactive demo — nothing real is installed. Tap the <strong>NPhones</strong> app.</span>
+</div>
+
+<div class="demo-stage">
+  <div class="dphone" role="application" aria-label="Simulated Android phone">
+    <div class="dscreen">
+      <div class="dnotch"></div>
+
+      <!-- personal Android -->
+      <div class="os os-personal" id="os-personal">
+        <div class="dstatus"><span>10:30</span><span>5G ▮▮▮ 86%</span></div>
+        <div class="dbanner"><span class="dot" style="background:#9aa39a;box-shadow:none"></span> Personal phone · your private space</div>
+        <div class="dapps">
+          <button class="dapp" data-personal><span class="ic" style="background:#4285F4">P</span>Phone</button>
+          <button class="dapp" data-personal><span class="ic" style="background:#34A853">M</span>Messages</button>
+          <button class="dapp" data-personal><span class="ic" style="background:#EA4335">C</span>Chrome</button>
+          <button class="dapp" data-personal><span class="ic" style="background:#FBBC05;color:#4d3c00">Ph</span>Photos</button>
+          <button class="dapp" data-personal><span class="ic" style="background:#5F6368">Ca</span>Camera</button>
+          <button class="dapp" data-personal><span class="ic" style="background:#1A73E8">Cl</span>Clock</button>
+          <button class="dapp" data-personal><span class="ic" style="background:#188038">Ma</span>Maps</button>
+          <button class="dapp" data-personal><span class="ic" style="background:#25D366">W</span>WhatsApp</button>
+          <button class="dapp" id="nphones-app" aria-label="Open NPhones">
+            <span class="ic" style="background:#DEDEDE">
+              <svg width="34" height="34" viewBox="0 0 100 100" aria-hidden="true">
+                <rect x="22" y="12" width="36" height="56" rx="12" fill="#CFE0C2" opacity="0.9"/>
+                <rect x="31" y="21" width="37" height="58" rx="12" fill="#84AF72" opacity="0.85"/>
+                <rect x="40" y="30" width="38" height="58" rx="13" fill="#304C27"/>
+                <rect x="46" y="36" width="26" height="46" rx="7" fill="#F0F7EC"/>
+              </svg>
+            </span>NPhones
+          </button>
+        </div>
+        <div class="ddock">
+          <span class="ic" style="width:46px;height:46px;border-radius:15px;background:#4285F4;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700">P</span>
+          <span class="ic" style="width:46px;height:46px;border-radius:15px;background:#34A853;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700">M</span>
+          <span class="ic" style="width:46px;height:46px;border-radius:15px;background:#EA4335;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700">C</span>
+          <span class="ic" style="width:46px;height:46px;border-radius:15px;background:#5F6368;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700">Ca</span>
+        </div>
+      </div>
+
+      <!-- NPhones cloud OS -->
+      <div class="os os-work hidden" id="os-work">
+        <div class="dwall"></div>
+        <div class="dstatus"><span>10:30</span><span>NPhones 5G ▮▮▮</span></div>
+        <div class="dbanner"><span class="dot"></span> NPhones business line · active · +972 3 555 0100</div>
+        <div class="dapps">
+          <button class="dapp" data-work="WhatsApp Business"><span class="ic" style="background:#25D366">W</span>WhatsApp Biz</button>
+          <button class="dapp" data-work="Work email"><span class="ic" style="background:#EA4335">M</span>Work Gmail</button>
+          <button class="dapp" data-work="Company CRM"><span class="ic" style="background:#CFE0C2;color:#304C27">C</span>CRM</button>
+          <button class="dapp" data-work="Team calendar"><span class="ic" style="background:#4285F4">K</span>Calendar</button>
+          <button class="dapp" id="org-files"><span class="ic" style="background:#84AF72">F</span>Org Files</button>
+          <button class="dapp" data-work="Company drive"><span class="ic" style="background:#F0F7EC;color:#304C27">D</span>Drive</button>
+          <button class="dapp" data-work="Expenses"><span class="ic" style="background:#B98A4A">E</span>Expenses</button>
+          <button class="dapp" data-work="Field service"><span class="ic" style="background:#5F6368">FS</span>Service</button>
+        </div>
+        <div class="ddock">
+          <span class="ic" style="width:46px;height:46px;border-radius:15px;background:#304C27;display:flex;align-items:center;justify-content:center;color:#F0F7EC;font-weight:700">✆</span>
+          <span class="ic" style="width:46px;height:46px;border-radius:15px;background:#84AF72;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700">✉</span>
+          <span class="ic" style="width:46px;height:46px;border-radius:15px;background:#CFE0C2;display:flex;align-items:center;justify-content:center;color:#304C27;font-weight:700">⌂</span>
+        </div>
+      </div>
+
+      <!-- splash -->
+      <div class="dsplash" id="splash" aria-hidden="true">
+        <svg width="60" height="76" viewBox="0 0 102 130" aria-hidden="true">
+          <rect x="10" y="10" width="50" height="78" rx="16" fill="#CFE0C2"/>
+          <rect x="24" y="24" width="52" height="82" rx="16" fill="#84AF72"/>
+          <rect x="38" y="40" width="54" height="86" rx="16" fill="#F0F7EC"/>
+          <rect x="46" y="50" width="38" height="66" rx="8" fill="#304C27"/>
+        </svg>
+        <div class="wordmark">NPhones</div>
+        <div class="dbar"><i></i></div>
+        <div class="msg">Connecting to your cloud business phone…</div>
+      </div>
+
+      <!-- org files sheet -->
+      <div class="dsheet" id="sheet">
+        <div class="dsheet-panel">
+          <div class="dsheet-grip"></div>
+          <h3>Org Files</h3>
+          <div class="sub">Acme Logistics Ltd · synced from the company cloud</div>
+          <div class="dfile"><span class="fic" style="background:#D93025">PDF</span><span>Q3 customer contracts.pdf<br><span class="meta">Legal · updated yesterday</span></span></div>
+          <div class="dfile"><span class="fic" style="background:#188038">XLS</span><span>Price list 2026.xlsx<br><span class="meta">Sales · updated 2h ago</span></span></div>
+          <div class="dfile"><span class="fic" style="background:#4285F4">DOC</span><span>Field visit protocol.docx<br><span class="meta">Operations · v4</span></span></div>
+          <div class="dfile"><span class="fic" style="background:#84AF72">IMG</span><span>Site photos — Haifa install<br><span class="meta">28 items · work camera only</span></span></div>
+          <div class="dfile"><span class="fic" style="background:#5F6368">ZIP</span><span>Onboarding pack.zip<br><span class="meta">HR · shared with you</span></span></div>
+          <div class="dlock">Files live in the cloud phone — nothing is stored on this device.</div>
+        </div>
+      </div>
+
+      <div class="dtoast" id="toast">Opens inside the business phone</div>
+      <button class="exit-pill" id="exit">⏻ Exit business phone</button>
+      <div class="dhome"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+(function () {
+  'use strict';
+  var personal = document.getElementById('os-personal');
+  var work = document.getElementById('os-work');
+  var splash = document.getElementById('splash');
+  var sheet = document.getElementById('sheet');
+  var toast = document.getElementById('toast');
+  var exitBtn = document.getElementById('exit');
+  var toastTimer;
+
+  function showToast(msg) {
+    toast.textContent = msg;
+    toast.classList.add('on');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () { toast.classList.remove('on'); }, 1600);
+  }
+
+  document.getElementById('nphones-app').addEventListener('click', function () {
+    splash.classList.add('on');
+    setTimeout(function () {
+      personal.classList.add('hidden');
+      work.classList.remove('hidden');
+      exitBtn.classList.add('on');
+      splash.classList.remove('on');
+      showToast('Welcome to your business phone');
+    }, 1500);
+  });
+
+  exitBtn.addEventListener('click', function () {
+    work.classList.add('hidden');
+    personal.classList.remove('hidden');
+    exitBtn.classList.remove('on');
+    sheet.classList.remove('on');
+    showToast('Back to your personal phone — no traces left');
+  });
+
+  document.querySelectorAll('[data-personal]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      b.classList.remove('shake'); void b.offsetWidth; b.classList.add('shake');
+      showToast('Just a demo — tap NPhones');
+    });
+  });
+
+  document.querySelectorAll('[data-work]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      showToast(b.dataset.work + ' — opens inside the business phone');
+    });
+  });
+
+  document.getElementById('org-files').addEventListener('click', function () {
+    sheet.classList.add('on');
+  });
+  sheet.addEventListener('click', function (e) {
+    if (e.target === sheet) sheet.classList.remove('on');
+  });
+})();
+</script>
+<script src="assets/main.js"></script>
+</body>
+</html>

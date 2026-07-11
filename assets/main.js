@@ -1,0 +1,279 @@
+/* NPhones — interactions
+   typewriter hero · cursor-reactive blobs · reveals · tilt · counters · nav */
+(function () {
+  'use strict';
+
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.documentElement.classList.add(reduced ? 'reduced-motion' : 'js');
+
+  /* ---------- typewriter hero ---------- */
+  var tw = document.getElementById('typewriter');
+  if (tw) {
+    var cursorEl = document.getElementById('type-cursor');
+    var finalsWord = 'phones';
+    var words = ['first...', 'second...', 'third...', finalsWord];
+
+    function heroSettle() {
+      var l2 = document.querySelector('.hero h1 .line2');
+      if (l2) l2.classList.add('show');
+      ['.hero-sub', '.hero-ctas', '.hero-note', '.phone-cta'].forEach(function (s) {
+        var el = document.querySelector(s);
+        if (el) el.classList.add('show');
+      });
+      if (cursorEl) setTimeout(function () { cursorEl.style.display = 'none'; }, 2400);
+    }
+
+    if (reduced) {
+      tw.textContent = 'Your ' + finalsWord;
+      heroSettle();
+    } else {
+      var wi = 0, ci = 0, deleting = false;
+      var base = 'Your ';
+      tw.textContent = base;
+      function tick() {
+        var w = words[wi];
+        if (!deleting) {
+          ci++;
+          tw.textContent = base + w.slice(0, ci);
+          if (ci === w.length) {
+            if (wi === words.length - 1) { heroSettle(); return; }
+            deleting = true;
+            setTimeout(tick, 950);
+            return;
+          }
+          setTimeout(tick, 75 + Math.random() * 60);
+        } else {
+          ci--;
+          tw.textContent = base + w.slice(0, ci);
+          if (ci === 0) { deleting = false; wi++; setTimeout(tick, 260); return; }
+          setTimeout(tick, 38);
+        }
+      }
+      setTimeout(tick, 650);
+    }
+  }
+
+  /* ---------- cursor-reactive blobs ---------- */
+  if (!reduced) {
+    var blobs = [];
+    document.querySelectorAll('.blob').forEach(function (b, i) {
+      blobs.push({ el: b, depth: parseFloat(b.dataset.depth || (0.03 + (i % 3) * 0.025)), x: 0, y: 0, tx: 0, ty: 0 });
+    });
+    var mx = 0, my = 0;
+    window.addEventListener('mousemove', function (e) {
+      mx = e.clientX / window.innerWidth - 0.5;
+      my = e.clientY / window.innerHeight - 0.5;
+    }, { passive: true });
+    (function blobLoop() {
+      blobs.forEach(function (b) {
+        b.tx = mx * b.depth * 1200;
+        b.ty = my * b.depth * 1200;
+        b.x += (b.tx - b.x) * 0.06;
+        b.y += (b.ty - b.y) * 0.06;
+        b.el.style.transform = 'translate(' + b.x.toFixed(1) + 'px,' + b.y.toFixed(1) + 'px)';
+      });
+      requestAnimationFrame(blobLoop);
+    })();
+  }
+
+  /* ---------- scroll reveals: in AND out (desktop + mobile) ---------- */
+  if (!reduced && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        en.target.classList.toggle('in', en.isIntersecting);
+      });
+    }, { threshold: 0, rootMargin: '-40px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(function (el) { io.observe(el); });
+
+    var sio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        en.target.classList.toggle('in', en.isIntersecting);
+      });
+    }, { threshold: 0, rootMargin: '-6% 0px -6% 0px' });
+    document.querySelectorAll('.section').forEach(function (sec) {
+      sec.classList.add('sec-anim');
+      sio.observe(sec);
+    });
+  } else {
+    document.querySelectorAll('.reveal').forEach(function (el) { el.classList.add('in'); });
+  }
+
+  /* ---------- subpage hero typewriter (types once, no cycling) ---------- */
+  var subH1 = document.querySelector('.page-first h1');
+  if (subH1 && !tw) {
+    if (!reduced) {
+      var fullText = subH1.textContent;
+      subH1.style.minHeight = subH1.offsetHeight + 'px';
+      subH1.textContent = '';
+      var subCur = document.createElement('span');
+      subCur.className = 'type-cursor';
+      subH1.appendChild(subCur);
+      var si = 0;
+      function subTick() {
+        if (si < fullText.length) {
+          subCur.insertAdjacentText('beforebegin', fullText.charAt(si));
+          si++;
+          setTimeout(subTick, 30 + Math.random() * 38);
+        } else {
+          setTimeout(function () { subCur.remove(); }, 1800);
+        }
+      }
+      setTimeout(subTick, 350);
+    }
+  }
+
+  /* ---------- glass card tilt ---------- */
+  if (!reduced && matchMedia('(pointer: fine)').matches) {
+    document.querySelectorAll('[data-tilt]').forEach(function (card) {
+      card.addEventListener('mousemove', function (e) {
+        var r = card.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width - 0.5;
+        var py = (e.clientY - r.top) / r.height - 0.5;
+        card.style.transform = 'perspective(800px) rotateY(' + (px * 6) + 'deg) rotateX(' + (-py * 6) + 'deg) translateY(-4px)';
+      });
+      card.addEventListener('mouseleave', function () { card.style.transform = ''; });
+    });
+
+    var phone = document.querySelector('.phone');
+    if (phone) {
+      var stage = document.querySelector('.phone-stage');
+      stage.addEventListener('mousemove', function (e) {
+        var r = stage.getBoundingClientRect();
+        var px = (e.clientX - r.left) / r.width - 0.5;
+        var py = (e.clientY - r.top) / r.height - 0.5;
+        phone.style.transform = 'rotateY(' + (px * 10) + 'deg) rotateX(' + (-py * 8) + 'deg)';
+      });
+      stage.addEventListener('mouseleave', function () { phone.style.transform = ''; });
+    }
+  }
+
+  /* ---------- count-up stats ---------- */
+  function animateCount(el) {
+    var target = parseFloat(el.dataset.count);
+    var suffix = el.dataset.suffix || '';
+    var dur = 1600, t0 = null;
+    function frame(t) {
+      if (!t0) t0 = t;
+      var p = Math.min((t - t0) / dur, 1);
+      p = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(target * p) + suffix;
+      if (p < 1) requestAnimationFrame(frame);
+    }
+    requestAnimationFrame(frame);
+  }
+  if (!reduced && 'IntersectionObserver' in window) {
+    var cio = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { animateCount(en.target); cio.unobserve(en.target); }
+      });
+    }, { threshold: 0.6 });
+    document.querySelectorAll('[data-count]').forEach(function (el) { cio.observe(el); });
+  } else {
+    document.querySelectorAll('[data-count]').forEach(function (el) {
+      el.textContent = el.dataset.count + (el.dataset.suffix || '');
+    });
+  }
+
+  /* ---------- nav ---------- */
+  var nav = document.querySelector('.nav');
+  if (nav) {
+    window.addEventListener('scroll', function () {
+      nav.classList.toggle('scrolled', window.scrollY > 30);
+    }, { passive: true });
+    var burger = document.querySelector('.nav-burger');
+    if (burger) burger.addEventListener('click', function () { nav.classList.toggle('open'); });
+    nav.querySelectorAll('.nav-links a').forEach(function (a) {
+      a.addEventListener('click', function () { nav.classList.remove('open'); });
+    });
+  }
+
+  /* ---------- scroll-scrubbed deploy video ---------- */
+  var scrubSection = document.querySelector('.video-scrub');
+  var scrubVideo = document.getElementById('scrub-video');
+  if (scrubSection && scrubVideo) {
+    var phrases = scrubSection.querySelectorAll('.video-phrase');
+    var dots = scrubSection.querySelectorAll('.video-dots span');
+
+    function setPhase(p) {
+      var idx = Math.min(2, Math.floor(p * 3));
+      phrases.forEach(function (el, i) { el.classList.toggle('active', i === idx); });
+      dots.forEach(function (el, i) { el.classList.toggle('active', i <= idx); });
+    }
+
+    if (reduced) {
+      scrubVideo.setAttribute('controls', '');
+      setPhase(0.99);
+    } else {
+      var curT = 0, ready = false;
+      scrubVideo.addEventListener('loadedmetadata', function () { ready = true; });
+      scrubVideo.load();
+      (function scrubLoop() {
+        var total = scrubSection.offsetHeight - window.innerHeight;
+        if (ready && total > 0) {
+          var rect = scrubSection.getBoundingClientRect();
+          var p = Math.min(Math.max(-rect.top / total, 0), 1);
+          var target = p * (scrubVideo.duration - 0.05);
+          curT += (target - curT) * 0.14;
+          if (Math.abs(scrubVideo.currentTime - curT) > 0.01) {
+            try { scrubVideo.currentTime = curT; } catch (e) {}
+          }
+          setPhase(p);
+        }
+        requestAnimationFrame(scrubLoop);
+      })();
+    }
+  }
+
+  /* ---------- circular text cursor orbit (vanilla port of React Bits <CircularText />) ---------- */
+  if (!reduced && matchMedia('(pointer: fine)').matches) {
+    var ORBIT_TEXT = 'ONE DEVICE, NDLESS PHONES. ';
+    var orbit = document.createElement('div');
+    orbit.id = 'cursor-orbit';
+    var ring = document.createElement('div');
+    ring.className = 'orbit-ring';
+    var chars = Array.from(ORBIT_TEXT);
+    chars.forEach(function (ch, i) {
+      var s = document.createElement('span');
+      s.textContent = ch;
+      s.style.setProperty('--a', ((360 / chars.length) * i).toFixed(2) + 'deg');
+      ring.appendChild(s);
+    });
+    orbit.appendChild(ring);
+    document.body.appendChild(orbit);
+
+    var omx = -200, omy = -200, ox = -200, oy = -200;
+    var angle = 0, speed = 360 / 20, targetSpeed = 360 / 20; /* deg per second */
+    var lastT = performance.now();
+    var seen = false;
+
+    window.addEventListener('mousemove', function (e) {
+      omx = e.clientX; omy = e.clientY;
+      if (!seen) { seen = true; ox = omx; oy = omy; orbit.classList.add('visible'); }
+    }, { passive: true });
+    document.addEventListener('mouseleave', function () { orbit.classList.remove('visible'); seen = false; });
+    document.addEventListener('mouseover', function (e) {
+      targetSpeed = e.target.closest('a, button, input, .glass') ? 360 / 5 : 360 / 20;
+    });
+
+    (function orbitLoop(t) {
+      var dt = Math.min((t - lastT) / 1000, 0.05);
+      lastT = t;
+      speed += (targetSpeed - speed) * 0.08;
+      angle = (angle + speed * dt) % 360;
+      ox += (omx - ox) * 0.12;
+      oy += (omy - oy) * 0.12;
+      orbit.style.transform = 'translate(' + (ox - 45).toFixed(1) + 'px,' + (oy - 45).toFixed(1) + 'px)';
+      ring.style.transform = 'rotate(' + angle.toFixed(2) + 'deg)';
+      requestAnimationFrame(orbitLoop);
+    })(lastT);
+  }
+
+  /* ---------- static form placeholder ---------- */
+  document.querySelectorAll('form[data-static]').forEach(function (f) {
+    f.addEventListener('submit', function (e) {
+      e.preventDefault();
+      var note = f.parentElement.querySelector('.form-note');
+      if (note) note.textContent = 'Form wiring pending — connect your CRM or email endpoint here before launch.';
+    });
+  });
+})();
