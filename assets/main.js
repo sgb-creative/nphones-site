@@ -6,6 +6,11 @@
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   document.documentElement.classList.add(reduced ? 'reduced-motion' : 'js');
 
+  /* start reloads at the top — the animated hero replays, so restored
+     scroll offsets would strand the headline under the fixed header */
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  if (!location.hash) window.scrollTo(0, 0);
+
   /* ---------- smooth inertia scrolling (Lenis) ---------- */
   if (!reduced && typeof Lenis !== 'undefined' && matchMedia('(pointer: fine)').matches) {
     document.documentElement.style.scrollBehavior = 'auto';
