@@ -234,8 +234,22 @@ PAGES['insights.html'] = page(
 )
 
 # ---------------- use-cases hub ----------------
-def uc_card(href, title, text):
-    return card(title, text, f'<a class="link-arrow" href="{href}">Explore →</a>')
+UC_ICONS = {
+    'sales': '<path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/>',
+    'field': '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/>',
+    'logistics': '<rect x="1" y="3" width="15" height="13" rx="2"/><path d="M16 8h4l3 3v5h-7V8z"/><circle cx="5.5" cy="18.5" r="2"/><circle cx="18.5" cy="18.5" r="2"/>',
+    'contractors': '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/>',
+    'remote': '<circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 0 1 0 18M12 3a15 15 0 0 0 0 18"/>',
+    'government': '<path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/>',
+}
+def uc_icon(key):
+    return (f'<div class="icon-chip"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" '
+            f'stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" '
+            f'aria-hidden="true">{UC_ICONS[key]}</svg></div>')
+def uc_card(href, title, text, icon):
+    return (f'<div class="glass card reveal" data-tilt>{uc_icon(icon)}'
+            f'<h3>{title}</h3><p style="margin-top:.5rem">{text}</p>'
+            f'<a class="link-arrow" href="{href}">Explore →</a></div>')
 
 PAGES['use-cases.html'] = page(
     'Use Cases — A Cloud Business Phone for Every Workforce | NPhones',
@@ -244,12 +258,12 @@ PAGES['use-cases.html'] = page(
     'Not every employee works from a desk, and no organization wants to buy, ship and manage another physical phone. NPhones gives each user a complete business phone on the device they already have.',
     section(
         '<div class="grid-3">'
-        + uc_card('uc-sales.html', 'Sales &amp; customer-facing teams', 'A dedicated business number, WhatsApp Business, CRM and contacts — without another device, and without losing the customer when the rep leaves.')
-        + uc_card('uc-field.html', 'Field service &amp; technicians', 'Work orders, service apps and a business camera roll for teams that live on the road, not at a desk.')
-        + uc_card('uc-logistics.html', 'Delivery &amp; logistics', 'Connect drivers and couriers without exposing personal numbers or managing fleets of phones.')
-        + uc_card('uc-contractors.html', 'Contractors &amp; temporary workers', 'A complete business phone for exactly as long as the project lasts — then one click removes it.')
-        + uc_card('uc-remote.html', 'Remote &amp; global teams', 'A consistent business identity for distributed employees, wherever they work from.')
-        + uc_card('uc-government.html', 'Government &amp; defense', 'Managed mobile access for sensitive environments — with nothing stored on personal devices.')
+        + uc_card('uc-sales.html', 'Sales &amp; customer-facing teams', 'A dedicated business number, WhatsApp Business, CRM and contacts — without another device, and without losing the customer when the rep leaves.', 'sales')
+        + uc_card('uc-field.html', 'Field service &amp; technicians', 'Work orders, service apps and a business camera roll for teams that live on the road, not at a desk.', 'field')
+        + uc_card('uc-logistics.html', 'Delivery &amp; logistics', 'Connect drivers and couriers without exposing personal numbers or managing fleets of phones.', 'logistics')
+        + uc_card('uc-contractors.html', 'Contractors &amp; temporary workers', 'A complete business phone for exactly as long as the project lasts — then one click removes it.', 'contractors')
+        + uc_card('uc-remote.html', 'Remote &amp; global teams', 'A consistent business identity for distributed employees, wherever they work from.', 'remote')
+        + uc_card('uc-government.html', 'Government &amp; defense', 'Managed mobile access for sensitive environments — with nothing stored on personal devices.', 'government')
         + '</div>'
     )
     + cta_strip('Which use case fits your organization?', 'Tell us about your workforce and we’ll map NPhones to it.')
