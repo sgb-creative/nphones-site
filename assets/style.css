@@ -269,7 +269,12 @@ img, svg { display: block; }
 .section-cool-auto { background: linear-gradient(180deg, #FFFFFF 0%, var(--mint) 100%); }
 .section-warm-auto { background: linear-gradient(180deg, #FFFFFF 0%, var(--cream) 100%); }
 .section-dark { background: var(--ink); color: var(--mint); }
-.section-forest { background: var(--forest); color: var(--mint); }
+.section-forest { background: linear-gradient(150deg, #263D1F 0%, var(--forest) 55%, #46663C 100%); color: var(--cream); }
+.section-forest .btn-light {
+  background: rgba(247, 240, 236, 0.92);
+  border-color: rgba(38, 61, 31, 0.5);
+}
+.section-forest .btn-light:hover { background: rgba(251, 246, 243, 0.98); }
 .section-inner { position: relative; z-index: 2; padding: clamp(3.2rem, 7vw, 5.5rem) clamp(1.4rem, 5vw, 4.5rem); }
 
 /* ---------- blobs ---------- */
@@ -285,7 +290,8 @@ img, svg { display: block; }
 .blob.sage   .blob-inner { background: var(--sage); opacity: 0.85; }
 .blob.forest .blob-inner { background: var(--forest); opacity: 0.22; }
 .blob.cream  .blob-inner { background: var(--cream); opacity: 0.95; }
-.section-dark .blob.cream .blob-inner, .section-forest .blob.cream .blob-inner { opacity: 0.12; }
+.section-dark .blob.cream .blob-inner { opacity: 0.12; }
+.section-forest .blob.cream .blob-inner { opacity: 0.22; }
 .section-dark .blob.leaf   .blob-inner { opacity: 0.3; }
 .section-dark .blob.sage   .blob-inner { opacity: 0.16; }
 .section-dark .blob.forest .blob-inner { background: var(--leaf); opacity: 0.2; }

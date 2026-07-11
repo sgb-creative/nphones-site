@@ -50,6 +50,15 @@
       }
       i++;
     });
+    /* forest CTA panels get a warm cream glow to break the green monochrome */
+    document.querySelectorAll('.section-forest .blobs').forEach(function (blobs) {
+      var b = document.createElement('div');
+      b.className = 'blob cream';
+      b.dataset.depth = '0.05';
+      b.style.cssText = 'width:380px;height:380px;bottom:-120px;left:18%;';
+      b.innerHTML = '<div class="blob-inner"></div>';
+      blobs.appendChild(b);
+    });
   })();
 
   /* ---------- typewriter hero ---------- */
