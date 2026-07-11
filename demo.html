@@ -237,7 +237,7 @@
       <div class="os os-work hidden" id="os-work">
         <div class="dwall"></div>
         <div class="dstatus"><span>10:30</span><span>NPhones 5G ▮▮▮</span></div>
-        <div class="dbanner"><span class="dot"></span> NPhones business line · active · +972 3 555 0100</div>
+        <div class="dbanner"><span class="dot"></span> NPhones business line · active · <span id="biz-flag" style="margin:0 2px"></span><span id="biz-num">+972 3 555 0100</span></div>
         <div class="dapps">
           <button class="dapp" data-work="WhatsApp Business"><span class="ic" style="background:#25D366">W</span>WhatsApp Biz</button>
           <button class="dapp" data-work="Work email"><span class="ic" style="background:#EA4335">M</span>Work Gmail</button>
@@ -293,6 +293,45 @@
 <script>
 (function () {
   'use strict';
+  /* localized business number + flag, from browser locale (timezone fallback) */
+  var NUMBERS = {
+    US: '+1 (212) 555-0148', CA: '+1 (416) 555-0148', GB: '+44 20 7946 0958',
+    RU: '+7 495 555-01-48', IL: '+972 3 555-0100', DE: '+49 30 555 0148',
+    FR: '+33 1 55 50 01 48', ES: '+34 91 555 01 48', IT: '+39 06 5550 0148',
+    NL: '+31 20 555 0148', PL: '+48 22 555 01 48', UA: '+380 44 555 0148',
+    IN: '+91 11 5550 0148', BR: '+55 11 5555-0148', AU: '+61 2 5550 0148',
+    JP: '+81 3 5550 0148', MX: '+52 55 5550 0148', AE: '+971 4 555 0148'
+  };
+  var TZ_COUNTRY = {
+    'America/New_York': 'US', 'America/Chicago': 'US', 'America/Denver': 'US', 'America/Los_Angeles': 'US', 'America/Phoenix': 'US',
+    'America/Toronto': 'CA', 'America/Vancouver': 'CA', 'Europe/London': 'GB', 'Europe/Moscow': 'RU',
+    'Asia/Jerusalem': 'IL', 'Europe/Berlin': 'DE', 'Europe/Paris': 'FR', 'Europe/Madrid': 'ES',
+    'Europe/Rome': 'IT', 'Europe/Amsterdam': 'NL', 'Europe/Warsaw': 'PL', 'Europe/Kyiv': 'UA', 'Europe/Kiev': 'UA',
+    'Asia/Kolkata': 'IN', 'America/Sao_Paulo': 'BR', 'Australia/Sydney': 'AU', 'Asia/Tokyo': 'JP',
+    'America/Mexico_City': 'MX', 'Asia/Dubai': 'AE'
+  };
+  function visitorCountry() {
+    var langs = navigator.languages || [navigator.language || ''];
+    for (var i = 0; i < langs.length; i++) {
+      var m = /-([A-Za-z]{2})\b/.exec(langs[i]);
+      if (m) {
+        var c = m[1].toUpperCase();
+        if (NUMBERS[c]) return c;
+      }
+    }
+    try {
+      var tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+      if (TZ_COUNTRY[tz]) return TZ_COUNTRY[tz];
+    } catch (e) {}
+    return 'US';
+  }
+  function flagEmoji(cc) {
+    return String.fromCodePoint(cc.charCodeAt(0) + 127397, cc.charCodeAt(1) + 127397);
+  }
+  var cc = visitorCountry();
+  document.getElementById('biz-num').textContent = NUMBERS[cc];
+  document.getElementById('biz-flag').textContent = flagEmoji(cc);
+
   var personal = document.getElementById('os-personal');
   var work = document.getElementById('os-work');
   var splash = document.getElementById('splash');
