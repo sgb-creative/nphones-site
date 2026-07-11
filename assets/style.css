@@ -710,7 +710,7 @@ img, svg { display: block; }
 @media (max-width: 560px) {
   .grid-3, .grid-4, .steps, .stats { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; }
-  .nav { padding: 8px 10px 8px 14px; gap: 0.5rem; }
+  .nav { padding: 8px 10px 8px 14px; column-gap: 0.5rem; row-gap: 0; }
   .nav-logo svg { width: 24px; height: 34px; }
   .nav-logo .wordmark { font-size: 16px; }
   .btn { padding: 13px 20px; font-size: 12px; }
