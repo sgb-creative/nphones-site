@@ -34,6 +34,7 @@ def page(title, desc, kicker, h1, sub, body, cta_href="contact.html"):
       <li><a href="pricing.html">Pricing</a></li>
       <li><a href="partners.html">Partners</a></li>
       <li><a href="about.html">About</a></li>
+      <li class="menu-cta"><a href="{cta_href}">Request a demo</a></li>
     </ul>
     <a class="btn btn-primary nav-cta" href="{cta_href}">Request a demo</a>
     <button class="nav-burger" aria-label="Menu"><svg width="18" height="14" viewBox="0 0 18 14" aria-hidden="true"><path d="M1 1h16M1 7h16M1 13h16" stroke="#080808" stroke-width="2" stroke-linecap="round"/></svg></button>
