@@ -242,12 +242,13 @@ img, svg { display: block; }
 .nav-logo svg { width: 32px; height: 40px; flex-shrink: 0; }
 .nav-logo .wordmark { font-family: var(--font-display); font-size: 20px; color: var(--ink); letter-spacing: 0.03em; line-height: 1; }
 .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
-.nav-links a {
+.nav-links a:not(.btn) {
   font-weight: 600; font-size: 14px; color: var(--ink);
   padding: 9px 15px; border-radius: 14px;
   transition: background var(--dur) ease;
+  display: block;
 }
-.nav-links a:hover { background: rgba(132, 175, 114, 0.18); }
+.nav-links a:not(.btn):hover { background: rgba(132, 175, 114, 0.18); }
 .nav-cta { flex-shrink: 0; }
 .nav-burger { display: none; }
 .menu-cta { display: none; }
@@ -681,23 +682,12 @@ img, svg { display: block; }
   }
   .nav.open .nav-links { max-height: 440px; opacity: 1; margin-top: 10px; }
   .nav.open { background: rgba(247, 251, 244, 0.97); box-shadow: var(--shadow-lift); }
-  .nav-links a { display: block; padding: 12px 15px; }
+  .nav-links a:not(.btn) { padding: 12px 15px; }
   .nav-burger { transition: transform 0.35s var(--ease-spring); }
   .nav.open .nav-burger { transform: rotate(90deg); }
   .nav-cta { display: none; }
   .menu-cta { display: block; margin-top: 6px; }
-  .nav.open .nav-links .menu-cta a {
-    display: block;
-    text-align: center;
-    background: var(--forest);
-    color: var(--mint);
-    font-family: var(--font-display);
-    font-size: 12px;
-    letter-spacing: 0.07em;
-    text-transform: uppercase;
-    padding: 13px 15px;
-    border-radius: 14px;
-  }
+  .menu-cta .btn { width: 100%; justify-content: center; }
   /* hero content visible immediately on mobile — no empty void during typewriter */
   .js .hero-sub, .js .hero-ctas, .js .hero-note { opacity: 1; }
   .js .phone-cta { opacity: 1; visibility: visible; }
@@ -774,7 +764,11 @@ img, svg { display: block; }
   mix-blend-mode: difference;
   transform: translate(-50%, -50%) rotate(var(--a)) translateY(-40px);
 }
-@media (pointer: coarse) { #cursor-orbit { display: none; } }
+#cursor-orbit.pinned {
+  top: auto; left: auto;
+  right: 10px; bottom: 10px;
+  opacity: 1;
+}
 
 /* ---------- reduced motion ---------- */
 @media (prefers-reduced-motion: reduce) {

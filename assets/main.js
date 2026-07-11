@@ -224,8 +224,8 @@
     }
   }
 
-  /* ---------- circular text cursor orbit (vanilla port of React Bits <CircularText />) ---------- */
-  if (!reduced && matchMedia('(pointer: fine)').matches) {
+  /* ---------- circular text orbit: follows cursor on desktop, pinned bottom-right on mobile ---------- */
+  if (!reduced) {
     var ORBIT_TEXT = 'ONE DEVICE, NDLESS PHONES. ';
     var orbit = document.createElement('div');
     orbit.id = 'cursor-orbit';
@@ -241,28 +241,35 @@
     orbit.appendChild(ring);
     document.body.appendChild(orbit);
 
-    var omx = -200, omy = -200, ox = -200, oy = -200;
+    var pointerFine = matchMedia('(pointer: fine)').matches;
     var angle = 0, speed = 360 / 20, targetSpeed = 360 / 20; /* deg per second */
     var lastT = performance.now();
-    var seen = false;
 
-    window.addEventListener('mousemove', function (e) {
-      omx = e.clientX; omy = e.clientY;
-      if (!seen) { seen = true; ox = omx; oy = omy; orbit.classList.add('visible'); }
-    }, { passive: true });
-    document.addEventListener('mouseleave', function () { orbit.classList.remove('visible'); seen = false; });
-    document.addEventListener('mouseover', function (e) {
-      targetSpeed = e.target.closest('a, button, input, .glass') ? 360 / 5 : 360 / 20;
-    });
+    if (pointerFine) {
+      var omx = -200, omy = -200, ox = -200, oy = -200;
+      var seen = false;
+      window.addEventListener('mousemove', function (e) {
+        omx = e.clientX; omy = e.clientY;
+        if (!seen) { seen = true; ox = omx; oy = omy; orbit.classList.add('visible'); }
+      }, { passive: true });
+      document.addEventListener('mouseleave', function () { orbit.classList.remove('visible'); seen = false; });
+      document.addEventListener('mouseover', function (e) {
+        targetSpeed = e.target.closest('a, button, input, .glass') ? 360 / 5 : 360 / 20;
+      });
+    } else {
+      orbit.classList.add('pinned', 'visible');
+    }
 
     (function orbitLoop(t) {
       var dt = Math.min((t - lastT) / 1000, 0.05);
       lastT = t;
       speed += (targetSpeed - speed) * 0.08;
       angle = (angle + speed * dt) % 360;
-      ox += (omx - ox) * 0.12;
-      oy += (omy - oy) * 0.12;
-      orbit.style.transform = 'translate(' + (ox - 45).toFixed(1) + 'px,' + (oy - 45).toFixed(1) + 'px)';
+      if (pointerFine) {
+        ox += (omx - ox) * 0.12;
+        oy += (omy - oy) * 0.12;
+        orbit.style.transform = 'translate(' + (ox - 45).toFixed(1) + 'px,' + (oy - 45).toFixed(1) + 'px)';
+      }
       ring.style.transform = 'rotate(' + angle.toFixed(2) + 'deg)';
       requestAnimationFrame(orbitLoop);
     })(lastT);
