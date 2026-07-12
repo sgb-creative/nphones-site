@@ -329,16 +329,81 @@
     })(lastT);
   }
 
-  /* ---------- hero phone: live personal <-> business switch ---------- */
+  /* ---------- hero phone: usable mini-Android ---------- */
   var heroPhone = document.querySelector('.hero .phone');
   var modeTag = document.getElementById('mode-tag');
-  if (heroPhone && modeTag && !reduced) {
+  if (heroPhone && modeTag) {
     var personalMode = false;
-    setInterval(function () {
-      personalMode = !personalMode;
-      heroPhone.classList.toggle('show-personal', personalMode);
-      modeTag.textContent = personalMode ? 'Personal phone' : 'Business phone';
-    }, 4500);
+    var autoSwitch = null;
+
+    function setMode(p) {
+      personalMode = p;
+      heroPhone.classList.toggle('show-personal', p);
+      modeTag.textContent = (p ? 'Personal phone' : 'Business phone') + ' · tap to switch';
+    }
+    function stopAuto() {
+      if (autoSwitch) { clearInterval(autoSwitch); autoSwitch = null; }
+    }
+    if (!reduced) {
+      autoSwitch = setInterval(function () { setMode(!personalMode); }, 4500);
+    }
+    modeTag.addEventListener('click', function () {
+      stopAuto();
+      setMode(!personalMode);
+    });
+
+    /* app screens inside the hero phone */
+    var hpWa = document.getElementById('hp-wa');
+    var hpMail = document.getElementById('hp-mail');
+    var hpShot = document.getElementById('hp-shot');
+    function hpClose() {
+      [hpWa, hpMail, hpShot].forEach(function (s) { if (s) s.classList.remove('on'); });
+    }
+    heroPhone.querySelectorAll('[data-hp-close]').forEach(function (b) {
+      b.addEventListener('click', hpClose);
+    });
+    heroPhone.querySelectorAll('.app[data-app]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        stopAuto();
+        var kind = b.dataset.app;
+        if (kind === 'personal') {
+          /* personal apps stay private — that's the point */
+          b.classList.remove('shake'); void b.offsetWidth; b.classList.add('shake');
+          return;
+        }
+        if (kind === 'wa' && hpWa) { hpWa.classList.add('on'); return; }
+        if (kind === 'mail' && hpMail) { hpMail.classList.add('on'); return; }
+        if (hpShot) {
+          document.getElementById('hp-shot-title').textContent = b.dataset.name || 'App';
+          hpShot.classList.add('on');
+        }
+      });
+    });
+    /* functional WhatsApp composer */
+    var hpSend = document.getElementById('hp-send');
+    var hpMsg = document.getElementById('hp-msg');
+    if (hpSend && hpMsg) {
+      function hpSendMsg() {
+        var v = hpMsg.value.trim();
+        if (!v) return;
+        var chat = document.getElementById('hp-chat');
+        var out = document.createElement('div');
+        out.className = 'hpb out';
+        out.textContent = v;
+        chat.appendChild(out);
+        hpMsg.value = '';
+        chat.scrollTop = chat.scrollHeight;
+        setTimeout(function () {
+          var rep = document.createElement('div');
+          rep.className = 'hpb in';
+          rep.textContent = 'Got it, thanks!';
+          chat.appendChild(rep);
+          chat.scrollTop = chat.scrollHeight;
+        }, 1100);
+      }
+      hpSend.addEventListener('click', hpSendMsg);
+      hpMsg.addEventListener('keydown', function (e) { if (e.key === 'Enter') hpSendMsg(); });
+    }
   }
 
   /* ---------- homepage use-case chip switcher ---------- */

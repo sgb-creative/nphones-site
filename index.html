@@ -14,7 +14,7 @@
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-<link rel="stylesheet" href="assets/style.css?v=11">
+<link rel="stylesheet" href="assets/style.css?v=12">
 </head>
 <body>
 
@@ -66,50 +66,83 @@
       <p class="hero-note">Runs on Android today · iOS on the roadmap · No hardware required</p>
     </div>
     <div class="phone-stage">
-      <a class="phone-link" href="demo.html" aria-label="Open the interactive NPhones demo">
+      <div class="phone-link">
       <div class="phone">
         <div class="phone-screen">
           <div class="phone-notch"></div>
-          <div class="phone-status"><span>10:30</span><span>5G ▮▮▮</span></div>
+          <div class="phone-status">
+            <span class="st-time">10:30</span>
+            <span class="st-icons">
+              <svg width="14" height="11" viewBox="0 0 14 11" aria-hidden="true"><path d="M7 10.5 0.5 3.4A9.5 9.5 0 0 1 13.5 3.4z" fill="currentColor"/></svg>
+              <svg width="13" height="11" viewBox="0 0 13 11" aria-hidden="true"><path d="M0 11h2.5V7.5H0zM3.5 11H6V5H3.5zM7 11h2.5V2.5H7zM10.5 11H13V0h-2.5z" fill="currentColor"/></svg>
+              <svg width="20" height="10" viewBox="0 0 20 10" aria-hidden="true"><rect x="0.5" y="0.5" width="16" height="9" rx="2.5" fill="none" stroke="currentColor"/><rect x="2" y="2" width="11" height="6" rx="1.2" fill="currentColor"/><rect x="18" y="3" width="2" height="4" rx="1" fill="currentColor"/></svg>
+            </span>
+          </div>
           <div class="phone-body">
             <div class="phone-mode business">
-              <div class="phone-banner"><span class="dot"></span> NPhones business line · active</div>
-              <div class="phone-apps">
-                <div class="app"><div class="app-ic" style="background:#25D366">W</div>WhatsApp Biz</div>
-                <div class="app"><div class="app-ic" style="background:#EA4335">M</div>Work Gmail</div>
-                <div class="app"><div class="app-ic" style="background:#0B6B5C">C</div>CRM</div>
-                <div class="app"><div class="app-ic" style="background:#4285F4">K</div>Calendar</div>
-                <div class="app"><div class="app-ic" style="background:#15B097">F</div>Org Files</div>
-                <div class="app"><div class="app-ic" style="background:#34A853">P</div>Maps</div>
-                <div class="app"><div class="app-ic" style="background:#5F6368">D</div>Drive</div>
-                <div class="app"><div class="app-ic" style="background:#0A66C2">L</div>LinkedIn</div>
+              <div class="aglance">
+                <div class="aclock">10:30</div>
+                <div class="adate">Mon, Jul 13&nbsp;&nbsp;·&nbsp;&nbsp;22°</div>
+              </div>
+              <div class="mode-chip"><span class="dot"></span> NPhones business line · active</div>
+              <div class="phone-apps"><button class="app" type="button" data-app="wa"><div class="app-ic" style="background:#25D366"><img class="app-glyph" src="assets/appicons/whatsapp.svg" alt=""></div>WhatsApp</button><button class="app" type="button" data-app="mail"><div class="app-ic" style="background:#EA4335"><img class="app-glyph" src="assets/appicons/gmail.svg" alt=""></div>Gmail</button><button class="app" type="button" data-app="shot" data-name="CRM"><div class="app-ic" style="background:#0B6B5C;color:#fff">C</div>CRM</button><button class="app" type="button" data-app="shot" data-name="Calendar"><div class="app-ic" style="background:#4285F4"><img class="app-glyph" src="assets/appicons/googlecalendar.svg" alt=""></div>Calendar</button><button class="app" type="button" data-app="shot" data-name="Org Files"><div class="app-ic" style="background:#15B097;color:#fff">F</div>Org Files</button><button class="app" type="button" data-app="shot" data-name="Maps"><div class="app-ic" style="background:#34A853"><img class="app-glyph" src="assets/appicons/googlemaps.svg" alt=""></div>Maps</button><button class="app" type="button" data-app="shot" data-name="Drive"><div class="app-ic" style="background:#F4B400"><img class="app-glyph" src="assets/appicons/googledrive.svg" alt=""></div>Drive</button><button class="app" type="button" data-app="shot" data-name="Chrome"><div class="app-ic" style="background:#5F6368"><img class="app-glyph" src="assets/appicons/googlechrome.svg" alt=""></div>Chrome</button>
               </div>
             </div>
             <div class="phone-mode personal">
-              <div class="phone-banner"><span class="dot"></span> Personal phone · your private space</div>
-              <div class="phone-apps">
-                <div class="app"><div class="app-ic" style="background:#25D366">W</div>WhatsApp</div>
-                <div class="app"><div class="app-ic" style="background:#FBBC05;color:#4d3c00">Ph</div>Photos</div>
-                <div class="app"><div class="app-ic" style="background:#FF0000">Y</div>YouTube</div>
-                <div class="app"><div class="app-ic" style="background:#E1306C">I</div>Instagram</div>
-                <div class="app"><div class="app-ic" style="background:#1DB954">S</div>Spotify</div>
-                <div class="app"><div class="app-ic" style="background:#5F6368">Ca</div>Camera</div>
-                <div class="app"><div class="app-ic" style="background:#1A73E8">Cl</div>Clock</div>
-                <div class="app"><div class="app-ic" style="background:#34A853">G</div>Games</div>
+              <div class="aglance">
+                <div class="aclock">10:30</div>
+                <div class="adate">Mon, Jul 13&nbsp;&nbsp;·&nbsp;&nbsp;22°</div>
+              </div>
+              <div class="mode-chip pchip"><span class="dot"></span> Personal · your private space</div>
+              <div class="phone-apps"><button class="app" type="button" data-app="personal"><div class="app-ic" style="background:#25D366"><img class="app-glyph" src="assets/appicons/whatsapp.svg" alt=""></div>WhatsApp</button><button class="app" type="button" data-app="personal"><div class="app-ic" style="background:#FBBC05"><img class="app-glyph" src="assets/appicons/googlephotos.svg" alt=""></div>Photos</button><button class="app" type="button" data-app="personal"><div class="app-ic" style="background:#FF0000"><img class="app-glyph" src="assets/appicons/youtube.svg" alt=""></div>YouTube</button><button class="app" type="button" data-app="personal"><div class="app-ic" style="background:#E1306C"><img class="app-glyph" src="assets/appicons/instagram.svg" alt=""></div>Instagram</button><button class="app" type="button" data-app="personal"><div class="app-ic" style="background:#1DB954"><img class="app-glyph" src="assets/appicons/spotify.svg" alt=""></div>Spotify</button><button class="app" type="button" data-app="personal"><div class="app-ic" style="background:#5F6368"><img class="app-glyph" src="assets/appicons/googlechrome.svg" alt=""></div>Chrome</button><button class="app" type="button" data-app="personal"><div class="app-ic" style="background:#455A64;color:#fff">◉</div>Camera</button><button class="app" type="button" data-app="personal"><div class="app-ic" style="background:#1A73E8;color:#fff">C</div>Clock</button>
               </div>
             </div>
-            <span class="mode-tag" id="mode-tag">Business phone</span>
+            <button class="mode-tag" id="mode-tag" type="button">Business phone · tap to switch</button>
+          </div>
+          <div class="hp-screen" id="hp-wa">
+            <div class="hp-head"><button class="hp-back" type="button" data-hp-close>&#8249;</button> Dana · Acme Logistics <span class="hp-chip">business</span></div>
+            <div class="hp-chat" id="hp-chat">
+              <div class="hpb in">Did the Marina shipment leave?</div>
+              <div class="hpb out">Left 20 min ago — ETA 15:40.</div>
+            </div>
+            <div class="hp-input">
+              <input type="text" id="hp-msg" placeholder="Message" aria-label="Message">
+              <button id="hp-send" type="button" aria-label="Send">&#10148;</button>
+            </div>
+          </div>
+          <div class="hp-screen" id="hp-mail">
+            <div class="hp-head"><button class="hp-back" type="button" data-hp-close>&#8249;</button> Gmail <span class="hp-chip">business</span></div>
+            <div class="hp-list">
+              <div class="hp-row"><span class="hp-av" style="background:#15B097">D</span><span><b>Dana Peretz</b><br>Marina shipment — delivery note</span></div>
+              <div class="hp-row"><span class="hp-av" style="background:#5F6368">IT</span><span><b>IT Operations</b><br>Your business phone was updated</span></div>
+              <div class="hp-row"><span class="hp-av" style="background:#0B6B5C">R</span><span><b>Rachel Kim</b><br>Q3 pricing approval</span></div>
+            </div>
+          </div>
+          <div class="hp-screen" id="hp-shot">
+            <div class="hp-head"><button class="hp-back" type="button" data-hp-close>&#8249;</button> <span id="hp-shot-title">App</span> <span class="hp-chip">business</span></div>
+            <div class="hp-skel">
+              <div class="sk" style="height:30px;width:70%"></div>
+              <div class="sk" style="height:72px"></div>
+              <div class="sk" style="height:12px;width:85%"></div>
+              <div class="sk" style="height:12px;width:60%"></div>
+            </div>
+          </div>
+          <div class="phone-search">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+            <span>Search</span>
+            <svg width="12" height="15" viewBox="0 0 24 30" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" aria-hidden="true" style="margin-left:auto"><rect x="9" y="2" width="6" height="13" rx="3"/><path d="M5 13a7 7 0 0 0 14 0M12 20v5"/></svg>
           </div>
           <div class="phone-dock">
-            <div class="app-ic" style="background:#0B6B5C;width:40px;height:40px;border-radius:13px">✆</div>
-            <div class="app-ic" style="background:#15B097;width:40px;height:40px;border-radius:13px">✉</div>
-            <div class="app-ic" style="background:#B9E7DE;color:#0B6B5C;width:40px;height:40px;border-radius:13px">⌂</div>
+            <div class="app-ic dock-ic" style="background:#B9E7DE;color:#0B6B5C"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11 11 0 0 0 3.6.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1 11 11 0 0 0 .6 3.6 1 1 0 0 1-.25 1z"/></svg></div>
+            <div class="app-ic dock-ic" style="background:#0B6B5C;color:#F4F6F5"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20 2H4a2 2 0 0 0-2 2v18l4-4h14a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2z"/></svg></div>
+            <div class="app-ic dock-ic" style="background:#15B097;color:#fff"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5" fill="currentColor" stroke="none"/></svg></div>
+            <div class="app-ic dock-ic" style="background:#5F6368;color:#fff"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M9 3 7.5 5H4a2 2 0 0 0-2 2v11a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-3.5L15 3zM12 17.5A4.5 4.5 0 1 1 12 8.5a4.5 4.5 0 0 1 0 9z"/></svg></div>
           </div>
           <div class="phone-home"></div>
         </div>
       </div>
-      <span class="phone-cta">Click me for interactive demo</span>
-      </a>
+      <a class="phone-cta" href="demo.html">Open the full interactive demo</a>
+      </div>
     </div>
   </div>
 </header>
@@ -398,6 +431,6 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
-<script src="assets/main.js?v=8"></script>
+<script src="assets/main.js?v=12"></script>
 </body>
 </html>
