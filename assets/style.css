@@ -373,25 +373,6 @@ img, svg { display: block; }
 .hero-sub.show, .hero-ctas.show, .hero-note.show { opacity: 1; }
 .reduced-motion .hero-sub, .reduced-motion .hero-ctas, .reduced-motion .hero-note { opacity: 1; }
 
-/* ---------- inline headline token (Notion pattern) ---------- */
-.h1-token {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.22em;
-  background: rgba(21, 176, 151, 0.13);
-  border: 1.5px solid rgba(21, 176, 151, 0.35);
-  border-radius: var(--r-pill);
-  padding: 0.04em 0.32em 0.06em 0.24em;
-  line-height: 1.15;
-  white-space: nowrap;
-}
-.h1-token .tdot {
-  width: 0.3em; height: 0.3em;
-  border-radius: 50%;
-  background: var(--leaf);
-  flex-shrink: 0;
-}
-
 /* ---------- proof strip (pedigree until customer logos exist) ---------- */
 .proof-strip {
   grid-column: 1 / -1;
