@@ -417,6 +417,15 @@ img, svg { display: block; }
   color: rgba(8, 8, 8, 0.32);
   white-space: nowrap;
 }
+.proof-strip .plogo {
+  height: 20px;
+  width: auto;
+  display: inline-block;
+  filter: grayscale(1) brightness(0.4);
+  opacity: 0.45;
+  transition: filter var(--dur) ease, opacity var(--dur) ease;
+}
+.proof-strip .plogo:hover { filter: grayscale(0) brightness(1); opacity: 0.9; }
 
 /* ---------- use-case chip switcher (Clay/Miro pattern) ---------- */
 .uc-chips {

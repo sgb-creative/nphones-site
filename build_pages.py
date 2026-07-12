@@ -25,7 +25,7 @@ def page(title, desc, kicker, h1, sub, body, cta_href="contact.html#demo"):
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-<link rel="stylesheet" href="assets/style.css?v=7">
+<link rel="stylesheet" href="assets/style.css?v=8">
 </head>
 <body>
 <div class="nav-wrap">
@@ -92,7 +92,7 @@ def page(title, desc, kicker, h1, sub, body, cta_href="contact.html#demo"):
   </div>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
-<script src="assets/main.js?v=7"></script>
+<script src="assets/main.js?v=8"></script>
 </body>
 </html>
 '''
