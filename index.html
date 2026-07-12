@@ -10,11 +10,11 @@
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-<link rel="stylesheet" href="assets/style.css?v=2">
+<link rel="stylesheet" href="assets/style.css?v=3">
 </head>
 <body>
 
@@ -23,10 +23,10 @@
   <nav class="nav" aria-label="Main">
     <a class="nav-logo" href="index.html" aria-label="NPhones home">
       <svg width="30" height="42" viewBox="8 8 86 120" aria-hidden="true">
-        <rect x="10" y="10" width="50" height="78" rx="16" fill="#CFE0C2"/>
-        <rect x="24" y="24" width="52" height="82" rx="16" fill="#84AF72"/>
-        <rect x="38" y="40" width="54" height="86" rx="16" fill="#304C27"/>
-        <rect x="46" y="50" width="38" height="66" rx="8" fill="#F0F7EC"/>
+        <rect x="10" y="10" width="50" height="78" rx="16" fill="#B9E7DE"/>
+        <rect x="24" y="24" width="52" height="82" rx="16" fill="#15B097"/>
+        <rect x="38" y="40" width="54" height="86" rx="16" fill="#0B6B5C"/>
+        <rect x="46" y="50" width="38" height="66" rx="8" fill="#F4F6F5"/>
       </svg>
       <span class="wordmark">NPhones</span>
     </a>
@@ -75,17 +75,17 @@
           <div class="phone-apps">
             <div class="app"><div class="app-ic" style="background:#25D366">W</div>WhatsApp</div>
             <div class="app"><div class="app-ic" style="background:#EA4335">M</div>Gmail</div>
-            <div class="app"><div class="app-ic" style="background:#304C27">C</div>CRM</div>
+            <div class="app"><div class="app-ic" style="background:#0B6B5C">C</div>CRM</div>
             <div class="app"><div class="app-ic" style="background:#4285F4">K</div>Calendar</div>
-            <div class="app"><div class="app-ic" style="background:#84AF72">F</div>Files</div>
+            <div class="app"><div class="app-ic" style="background:#15B097">F</div>Files</div>
             <div class="app"><div class="app-ic" style="background:#34A853">P</div>Maps</div>
             <div class="app"><div class="app-ic" style="background:#5F6368">D</div>Drive</div>
             <div class="app"><div class="app-ic" style="background:#0A66C2">L</div>LinkedIn</div>
           </div>
           <div class="phone-dock">
-            <div class="app-ic" style="background:#304C27;width:40px;height:40px;border-radius:13px">✆</div>
-            <div class="app-ic" style="background:#84AF72;width:40px;height:40px;border-radius:13px">✉</div>
-            <div class="app-ic" style="background:#CFE0C2;color:#304C27;width:40px;height:40px;border-radius:13px">⌂</div>
+            <div class="app-ic" style="background:#0B6B5C;width:40px;height:40px;border-radius:13px">✆</div>
+            <div class="app-ic" style="background:#15B097;width:40px;height:40px;border-radius:13px">✉</div>
+            <div class="app-ic" style="background:#B9E7DE;color:#0B6B5C;width:40px;height:40px;border-radius:13px">⌂</div>
           </div>
           <div class="phone-home"></div>
         </div>
@@ -96,22 +96,13 @@
   </div>
 </header>
 
-<!-- ============ DEPLOY VIDEO (scroll-scrubbed, pinned) ============ -->
-<section class="video-scrub" id="deploy" aria-label="NPhones runs in your cloud, our cloud, or on-premises">
-  <div class="video-sticky">
-    <div class="video-card">
-      <video id="scrub-video" src="assets/media/deploy.mp4" muted playsinline preload="auto" tabindex="-1"></video>
-      <div class="video-overlay">
-        <span class="kicker">Deploy anywhere</span>
-        <div class="video-phrases">
-          <span class="video-phrase" data-phase="0">Your cloud.</span>
-          <span class="video-phrase" data-phase="1">Our cloud.</span>
-          <span class="video-phrase" data-phase="2">On-prem.</span>
-        </div>
-        <p class="video-sub">The same platform, wherever your security model needs it to live.</p>
-        <div class="video-dots" aria-hidden="true"><span></span><span></span><span></span></div>
-      </div>
-    </div>
+<!-- ============ PRODUCT VIDEO (full-width) ============ -->
+<section class="section video-feature" id="deploy" aria-label="NPhones runs in your cloud, our cloud, or on-premises">
+  <video src="assets/media/deploy.mp4" autoplay muted loop playsinline preload="metadata"></video>
+  <div class="video-overlay">
+    <span class="kicker">Deploy anywhere</span>
+    <div class="video-title">Your cloud. Our cloud. On-prem.</div>
+    <p class="video-sub">The same platform, wherever your security model needs it to live.</p>
   </div>
 </section>
 
@@ -259,7 +250,7 @@
         <p>Response times, activity and coverage across the whole workforce — data that was simply invisible before.</p>
       </div>
     </div>
-    <p class="reveal" style="margin:2rem auto 0;text-align:center;font-size:13.5px;color:rgba(240,247,236,.5);max-width:56ch">Scope: the business line only. Personal calls, apps and data on the device are never visible to the company.</p>
+    <p class="reveal" style="margin:2rem auto 0;text-align:center;font-size:13.5px;color:rgba(247,247,245,.5);max-width:56ch">Scope: the business line only. Personal calls, apps and data on the device are never visible to the company.</p>
   </div>
 </section>
 
@@ -280,7 +271,7 @@
         <h3 style="font-family:var(--font-display);font-weight:400;font-size:1.05rem">The old way</h3>
         <p style="margin-top:.7rem">Device purchase + carrier plan + MDM licence + shipping + IT provisioning time + replacement cycle every 2–3 years — <strong>per employee, forever</strong>. And when someone leaves, the number and the WhatsApp history often leave too.</p>
       </div>
-      <div class="glass card reveal reveal-d1" data-tilt style="border-color:rgba(48,76,39,.35)">
+      <div class="glass card reveal reveal-d1" data-tilt style="border-color:rgba(10,10,10,.35)">
         <h3 style="font-family:var(--font-display);font-weight:400;font-size:1.05rem;color:var(--forest)">The NPhones way</h3>
         <p style="margin-top:.7rem">One per-user subscription. No hardware, no logistics, no MDM stack, nothing to replace. Onboarding in 30 seconds, offboarding in one click, the business line stays yours. <strong>Save thousands per employee, every year.</strong></p>
       </div>
@@ -301,38 +292,12 @@
   <div class="section-inner">
     <span class="kicker">Request a demo</span>
     <h2 style="max-width:22ch;margin-inline:auto">Give your team their phones. On one device.</h2>
-    <p style="margin:1rem auto 0;max-width:52ch;color:rgba(240,247,236,.75)">Tell us about your workforce and we'll show you a live NPhones deployment — from console to a working business phone in minutes.</p>
+    <p style="margin:1rem auto 0;max-width:52ch;color:rgba(247,247,245,.75)">Tell us about your workforce and we'll show you a live NPhones deployment — from console to a working business phone in minutes.</p>
     <form class="glass cta-form" data-static>
       <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
-      <input type="text" name="first_name" placeholder="First name *" aria-label="First name" required>
-      <input type="text" name="last_name" placeholder="Last name *" aria-label="Last name" required>
+      <input type="text" name="name" placeholder="Full name *" aria-label="Full name" required>
       <input type="email" name="email" placeholder="Work email *" aria-label="Work email" required>
-      <input type="tel" name="phone" placeholder="Phone" aria-label="Phone">
-      <input type="text" name="company" placeholder="Company *" aria-label="Company" required>
-      <input type="text" name="job_title" placeholder="Job title" aria-label="Job title">
-      <select name="orgtype" aria-label="Organization type" required>
-        <option value="" disabled selected>Organization type *</option>
-        <option value="commercial">Commercial</option>
-        <option value="government">Government &amp; Defense</option>
-      </select>
-      <select name="workforce" aria-label="Workforce size">
-        <option value="" disabled selected>Workforce size</option>
-        <option>1–50</option><option>51–200</option><option>201–1,000</option><option>1,001–5,000</option><option>5,000+</option>
-      </select>
-      <select name="segment_commercial" data-org="commercial" aria-label="Industry" class="full" hidden>
-        <option value="" disabled selected>Industry</option>
-        <option>Financial services &amp; insurance</option><option>Healthcare &amp; home care</option><option>Logistics &amp; field services</option><option>Retail, hospitality &amp; franchise</option><option>Construction &amp; property</option><option>Other</option>
-      </select>
-      <select name="segment_government" data-org="government" aria-label="Sector" class="full" hidden>
-        <option value="" disabled selected>Sector</option>
-        <option>Civilian government</option><option>Defense</option><option>Critical infrastructure</option><option>Emergency services</option><option>Other</option>
-      </select>
-      <select name="source" aria-label="How did you hear about us?" class="full">
-        <option value="" disabled selected>How did you hear about us?</option>
-        <option>Search engine</option><option>LinkedIn</option><option>Referral</option><option>Partner</option><option>Event or webinar</option><option>Press</option><option>Other</option>
-      </select>
-      <textarea name="message" placeholder="Tell us about your workforce and what you'd like to see" aria-label="Message" class="full"></textarea>
-      <label class="consent full"><input type="checkbox" name="consent" required> I agree to the <a href="privacy.html">privacy policy</a>.</label>
+      <textarea name="message" placeholder="Tell us about your workforce (optional)" aria-label="Message" class="full"></textarea>
       <button class="btn btn-light full" type="submit">Request a demo</button>
     </form>
     <p class="form-note">We reply within 24 hours. Android today, iOS on the roadmap.</p>
@@ -349,15 +314,15 @@
       <div>
         <div style="display:flex;align-items:center;gap:10px">
           <svg width="24" height="34" viewBox="8 8 86 120" aria-hidden="true">
-            <rect x="10" y="10" width="50" height="78" rx="16" fill="#CFE0C2"/>
-            <rect x="24" y="24" width="52" height="82" rx="16" fill="#84AF72"/>
-            <rect x="38" y="40" width="54" height="86" rx="16" fill="#F0F7EC"/>
+            <rect x="10" y="10" width="50" height="78" rx="16" fill="#B9E7DE"/>
+            <rect x="24" y="24" width="52" height="82" rx="16" fill="#15B097"/>
+            <rect x="38" y="40" width="54" height="86" rx="16" fill="#F4F6F5"/>
             <rect x="46" y="50" width="38" height="66" rx="8" fill="#080808"/>
           </svg>
           <span class="wordmark">NPhones</span>
         </div>
         <p class="tagline">One device, Ndless phones.</p>
-        <p style="margin-top:1rem;font-size:14px;color:rgba(240,247,236,.6)">The cloud business phone platform for enterprises.<br>Beer Sheva, Israel</p>
+        <p style="margin-top:1rem;font-size:14px;color:rgba(247,247,245,.6)">The cloud business phone platform for enterprises.<br>Beer Sheva, Israel</p>
       </div>
       <div>
         <h4>Product</h4>
@@ -389,12 +354,12 @@
     </div>
     <div class="footer-bottom">
       <span>© 2026 NPhones. All rights reserved.</span>
-      <a href="https://www.linkedin.com/" aria-label="NPhones on LinkedIn" style="color:rgba(240,247,236,.6)">LinkedIn</a>
+      <a href="https://www.linkedin.com/" aria-label="NPhones on LinkedIn" style="color:rgba(247,247,245,.6)">LinkedIn</a>
     </div>
   </div>
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
-<script src="assets/main.js?v=2"></script>
+<script src="assets/main.js?v=3"></script>
 </body>
 </html>

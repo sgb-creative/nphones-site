@@ -2,8 +2,8 @@
 """Generate NPhones subpages from a shared template."""
 import os
 
-LOGO_SVG = '''<svg width="30" height="42" viewBox="8 8 86 120" aria-hidden="true"><rect x="10" y="10" width="50" height="78" rx="16" fill="#CFE0C2"/><rect x="24" y="24" width="52" height="82" rx="16" fill="#84AF72"/><rect x="38" y="40" width="54" height="86" rx="16" fill="#304C27"/><rect x="46" y="50" width="38" height="66" rx="8" fill="#F0F7EC"/></svg>'''
-FOOT_SVG = LOGO_SVG.replace('width="30" height="42"', 'width="24" height="34"').replace('fill="#304C27"', 'fill="#F0F7EC"', 1)
+LOGO_SVG = '''<svg width="30" height="42" viewBox="8 8 86 120" aria-hidden="true"><rect x="10" y="10" width="50" height="78" rx="16" fill="#B9E7DE"/><rect x="24" y="24" width="52" height="82" rx="16" fill="#15B097"/><rect x="38" y="40" width="54" height="86" rx="16" fill="#0B6B5C"/><rect x="46" y="50" width="38" height="66" rx="8" fill="#F4F6F5"/></svg>'''
+FOOT_SVG = LOGO_SVG.replace('width="30" height="42"', 'width="24" height="34"').replace('fill="#0B6B5C"', 'fill="#F4F6F5"', 1)
 
 def blob(kind, depth, style):
     return f'<div class="blob {kind}" data-depth="{depth}" style="{style}"><div class="blob-inner"></div></div>'
@@ -11,7 +11,7 @@ def blob(kind, depth, style):
 BLOBSET = (blob('leaf', '0.05', 'width:380px;height:380px;top:-110px;right:-70px;')
            + blob('sage', '0.03', 'width:340px;height:340px;bottom:-100px;left:-80px;'))
 
-def page(title, desc, kicker, h1, sub, body, cta_href="contact.html"):
+def page(title, desc, kicker, h1, sub, body, cta_href="contact.html#demo"):
     return f'''<!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,11 +21,11 @@ def page(title, desc, kicker, h1, sub, body, cta_href="contact.html"):
 <meta name="description" content="{desc}">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-<link rel="stylesheet" href="assets/style.css?v=2">
+<link rel="stylesheet" href="assets/style.css?v=3">
 </head>
 <body>
 <div class="nav-wrap">
@@ -64,7 +64,7 @@ def page(title, desc, kicker, h1, sub, body, cta_href="contact.html"):
       <div>
         <div style="display:flex;align-items:center;gap:10px">{FOOT_SVG}<span class="wordmark">NPhones</span></div>
         <p class="tagline">One device, Ndless phones.</p>
-        <p style="margin-top:1rem;font-size:14px;color:rgba(240,247,236,.6)">The cloud business phone platform for enterprises.<br>Beer Sheva, Israel</p>
+        <p style="margin-top:1rem;font-size:14px;color:rgba(247,247,245,.6)">The cloud business phone platform for enterprises.<br>Beer Sheva, Israel</p>
       </div>
       <div><h4>Product</h4><ul>
         <li><a href="platform.html">Platform</a></li>
@@ -87,22 +87,22 @@ def page(title, desc, kicker, h1, sub, body, cta_href="contact.html"):
     </div>
     <div class="footer-bottom">
       <span>© 2026 NPhones. All rights reserved.</span>
-      <a href="https://www.linkedin.com/" aria-label="NPhones on LinkedIn" style="color:rgba(240,247,236,.6)">LinkedIn</a>
+      <a href="https://www.linkedin.com/" aria-label="NPhones on LinkedIn" style="color:rgba(247,247,245,.6)">LinkedIn</a>
     </div>
   </div>
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
-<script src="assets/main.js?v=2"></script>
+<script src="assets/main.js?v=3"></script>
 </body>
 </html>
 '''
 
-def cta_strip(h, sub, btn="Request a demo", href="contact.html"):
+def cta_strip(h, sub, btn="Request a demo", href="contact.html#demo"):
     return f'''<section class="section section-forest cta-panel">
   <div class="blobs" aria-hidden="true">{blob('leaf', '0.05', 'width:360px;height:360px;top:-110px;right:-80px;')}</div>
   <div class="section-inner">
     <h2 style="max-width:24ch;margin-inline:auto">{h}</h2>
-    <p style="margin:1rem auto 0;max-width:52ch;color:rgba(240,247,236,.75)">{sub}</p>
+    <p style="margin:1rem auto 0;max-width:52ch;color:rgba(247,247,245,.75)">{sub}</p>
     <div style="margin-top:1.8rem"><a class="btn btn-light" href="{href}">{btn}</a></div>
   </div>
 </section>'''
@@ -223,7 +223,7 @@ PAGES['insights.html'] = page(
         + card('Audit &amp; compliance', 'Full communication records for regulated teams — finance, healthcare, government — by policy, not by chance.')
         + card('Enterprise analytics', 'Response times, activity and coverage across the whole workforce — data that was simply invisible before.') + '''
     </div>
-    <p class="reveal" style="margin:2rem auto 0;text-align:center;font-size:13.5px;color:rgba(240,247,236,.5);max-width:56ch">Scope: the business line only. Personal calls, apps and data on the device are never visible to the company.</p>
+    <p class="reveal" style="margin:2rem auto 0;text-align:center;font-size:13.5px;color:rgba(247,247,245,.5);max-width:56ch">Scope: the business line only. Personal calls, apps and data on the device are never visible to the company.</p>
   </div>
 </section>'''
     + section(
@@ -393,10 +393,10 @@ def team(name, role, bio, img=None):
     else:
         avatar = ('<div class="tphone"><div class="tscreen" style="height:148px;display:flex;align-items:center;justify-content:center">'
                   '<svg width="56" height="70" viewBox="0 0 102 130" aria-hidden="true">'
-                  '<rect x="10" y="10" width="50" height="78" rx="16" fill="#CFE0C2"/>'
-                  '<rect x="24" y="24" width="52" height="82" rx="16" fill="#84AF72"/>'
-                  '<rect x="38" y="40" width="54" height="86" rx="16" fill="#304C27"/>'
-                  '<rect x="46" y="50" width="38" height="66" rx="8" fill="#F0F7EC"/></svg>'
+                  '<rect x="10" y="10" width="50" height="78" rx="16" fill="#B9E7DE"/>'
+                  '<rect x="24" y="24" width="52" height="82" rx="16" fill="#15B097"/>'
+                  '<rect x="38" y="40" width="54" height="86" rx="16" fill="#0B6B5C"/>'
+                  '<rect x="46" y="50" width="38" height="66" rx="8" fill="#F4F6F5"/></svg>'
                   '</div></div>')
     return (f'<div class="glass card team-card reveal" data-tilt>{avatar}'
             f'<h3>{name}</h3><span class="team-role">{role}</span>'
@@ -446,39 +446,13 @@ PAGES['contact.html'] = page(
     <h2 style="max-width:22ch;margin-inline:auto">Give your team their phones. On one device.</h2>
     <form class="glass cta-form" data-static>
       <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" style="position:absolute;left:-9999px" aria-hidden="true">
-      <input type="text" name="first_name" placeholder="First name *" aria-label="First name" required>
-      <input type="text" name="last_name" placeholder="Last name *" aria-label="Last name" required>
+      <input type="text" name="name" placeholder="Full name *" aria-label="Full name" required>
       <input type="email" name="email" placeholder="Work email *" aria-label="Work email" required>
-      <input type="tel" name="phone" placeholder="Phone" aria-label="Phone">
-      <input type="text" name="company" placeholder="Company *" aria-label="Company" required>
-      <input type="text" name="job_title" placeholder="Job title" aria-label="Job title">
-      <select name="orgtype" aria-label="Organization type" required>
-        <option value="" disabled selected>Organization type *</option>
-        <option value="commercial">Commercial</option>
-        <option value="government">Government &amp; Defense</option>
-      </select>
-      <select name="workforce" aria-label="Workforce size">
-        <option value="" disabled selected>Workforce size</option>
-        <option>1–50</option><option>51–200</option><option>201–1,000</option><option>1,001–5,000</option><option>5,000+</option>
-      </select>
-      <select name="segment_commercial" data-org="commercial" aria-label="Industry" class="full" hidden>
-        <option value="" disabled selected>Industry</option>
-        <option>Financial services &amp; insurance</option><option>Healthcare &amp; home care</option><option>Logistics &amp; field services</option><option>Retail, hospitality &amp; franchise</option><option>Construction &amp; property</option><option>Other</option>
-      </select>
-      <select name="segment_government" data-org="government" aria-label="Sector" class="full" hidden>
-        <option value="" disabled selected>Sector</option>
-        <option>Civilian government</option><option>Defense</option><option>Critical infrastructure</option><option>Emergency services</option><option>Other</option>
-      </select>
-      <select name="source" aria-label="How did you hear about us?" class="full">
-        <option value="" disabled selected>How did you hear about us?</option>
-        <option>Search engine</option><option>LinkedIn</option><option>Referral</option><option>Partner</option><option>Event or webinar</option><option>Press</option><option>Other</option>
-      </select>
-      <textarea name="message" placeholder="Tell us about your workforce and what you'd like to see" aria-label="Message" class="full"></textarea>
-      <label class="consent full"><input type="checkbox" name="consent" required> I agree to the <a href="privacy.html">privacy policy</a>.</label>
+      <textarea name="message" placeholder="Tell us about your workforce (optional)" aria-label="Message" class="full"></textarea>
       <button class="btn btn-light full" type="submit">Request a demo</button>
     </form>
     <p class="form-note">We reply within 24 hours. Android today, iOS on the roadmap.</p>
-    <p style="margin:1.6rem auto 0;text-align:center;font-size:14px;color:rgba(240,247,236,.7)">Prefer email? <a href="mailto:contact@nphones.com" style="color:var(--sage);font-weight:600">contact@nphones.com</a></p>
+    <p style="margin:1.6rem auto 0;text-align:center;font-size:14px;color:rgba(247,247,245,.7)">Prefer email? <a href="mailto:contact@nphones.com" style="color:var(--sage);font-weight:600">contact@nphones.com</a></p>
   </div>
 </section>'''
     + section(
