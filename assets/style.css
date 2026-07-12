@@ -218,7 +218,7 @@ img, svg { display: block; }
 /* ---------- nav ---------- */
 .nav-wrap {
   position: fixed;
-  top: 0; left: 0; right: 0;
+  top: 14px; left: 0; right: 0;
   z-index: 100;
   pointer-events: none;
 }
@@ -228,12 +228,12 @@ img, svg { display: block; }
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
   gap: 1rem;
-  width: 100%;
-  margin: 0;
-  padding: 12px clamp(1rem, 4vw, 3rem);
-  border-radius: 0;
-  background: var(--glass-bg-strong);
-  border-bottom: 1px solid var(--glass-border);
+  width: min(1600px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 10px 14px 10px 22px;
+  border-radius: var(--r-md);
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
   backdrop-filter: blur(16px) saturate(160%);
   -webkit-backdrop-filter: blur(16px) saturate(160%);
   box-shadow: var(--shadow-soft);
@@ -259,9 +259,9 @@ img, svg { display: block; }
 /* ---------- sections: rounded islands ---------- */
 .section {
   position: relative;
-  width: 100%;
-  margin: 0;
-  border-radius: 0;
+  width: min(1600px, calc(100% - 2rem));
+  margin: 1.6rem auto;
+  border-radius: var(--r-xl);
   overflow: hidden;
   background: var(--white);
 }
@@ -347,7 +347,7 @@ img, svg { display: block; }
 .section-dark .section-head p, .section-forest .section-head p { color: rgba(247, 247, 245, 0.7); }
 
 /* ---------- hero ---------- */
-.hero { margin-top: 66px; }
+.hero { margin-top: 92px; }
 .hero .section-inner {
   display: grid;
   grid-template-columns: 1.1fr 0.9fr;
@@ -664,7 +664,7 @@ img, svg { display: block; }
 }
 
 /* ---------- subpage helpers ---------- */
-.page-first { margin-top: 66px; }
+.page-first { margin-top: 92px; }
 .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 0.9rem; }
 .chip {
   font-size: 12.5px; font-weight: 600;
@@ -766,7 +766,7 @@ img, svg { display: block; }
 @media (max-width: 560px) {
   .grid-3, .grid-4, .steps, .stats { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; }
-  .nav { padding: 10px 1rem; column-gap: 0.5rem; row-gap: 0; }
+  .nav { padding: 8px 10px 8px 14px; column-gap: 0.5rem; row-gap: 0; }
   .nav-logo svg { width: 24px; height: 34px; }
   .nav-logo .wordmark { font-size: 16px; }
   .btn { padding: 13px 20px; font-size: 12px; }
