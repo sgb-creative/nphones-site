@@ -287,15 +287,15 @@ img, svg { display: block; }
   will-change: transform;
 }
 .blob-inner { position: absolute; inset: 0; border-radius: 50%; animation: drift 16s ease-in-out infinite; }
-.blob.leaf   .blob-inner { background: var(--leaf); opacity: 0.5; }
-.blob.sage   .blob-inner { background: var(--sage); opacity: 0.85; }
-.blob.forest .blob-inner { background: var(--forest); opacity: 0.22; }
-.blob.cream  .blob-inner { background: var(--cream); opacity: 0.95; }
-.section-dark .blob.cream .blob-inner { opacity: 0.12; }
-.section-forest .blob.cream .blob-inner { opacity: 0.22; }
-.section-dark .blob.leaf   .blob-inner { opacity: 0.3; }
-.section-dark .blob.sage   .blob-inner { opacity: 0.16; }
-.section-dark .blob.forest .blob-inner { background: var(--leaf); opacity: 0.2; }
+.blob.leaf   .blob-inner { background: var(--leaf); opacity: 0.16; }
+.blob.sage   .blob-inner { background: var(--sage); opacity: 0.5; }
+.blob.forest .blob-inner { background: var(--forest); opacity: 0.09; }
+.blob.cream  .blob-inner { background: var(--cream); opacity: 0.6; }
+.section-dark .blob.cream .blob-inner { opacity: 0.06; }
+.section-forest .blob.cream .blob-inner { opacity: 0.1; }
+.section-dark .blob.leaf   .blob-inner { opacity: 0.1; }
+.section-dark .blob.sage   .blob-inner { opacity: 0.07; }
+.section-dark .blob.forest .blob-inner { background: var(--leaf); opacity: 0.07; }
 @keyframes drift {
   0%, 100% { transform: translate(0, 0) scale(1); }
   50% { transform: translate(36px, -28px) scale(1.06); }
