@@ -373,46 +373,6 @@ img, svg { display: block; }
 .hero-sub.show, .hero-ctas.show, .hero-note.show { opacity: 1; }
 .reduced-motion .hero-sub, .reduced-motion .hero-ctas, .reduced-motion .hero-note { opacity: 1; }
 
-/* ---------- proof strip (pedigree until customer logos exist) ---------- */
-.proof-strip {
-  grid-column: 1 / -1;
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 12px 28px;
-  padding-top: 2.4rem;
-  margin-top: 1rem;
-  border-top: 1px solid rgba(10, 10, 10, 0.08);
-}
-.proof-strip .plabel {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(8, 8, 8, 0.4);
-}
-.proof-strip .pitem {
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: 0.01em;
-  color: rgba(8, 8, 8, 0.32);
-  white-space: nowrap;
-}
-.proof-strip .plogo {
-  height: 20px;
-  width: auto;
-  display: inline-block;
-  filter: grayscale(1) brightness(0.4);
-  opacity: 0.45;
-  transition: filter var(--dur) ease, opacity var(--dur) ease;
-}
-/* optical normalization — each SVG has different internal padding */
-.plogo-similarweb { height: 17px; }
-.plogo-zoominfo { height: 25px; }
-.plogo-nyse { height: 29px; }
-.plogo-netapp { height: 16px; }
-.proof-strip .plogo:hover { filter: grayscale(0) brightness(1); opacity: 0.9; }
-
 /* ---------- use-case chip switcher (Clay/Miro pattern) ---------- */
 .uc-chips {
   display: flex;
