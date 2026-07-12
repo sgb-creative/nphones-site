@@ -329,6 +329,67 @@
     })(lastT);
   }
 
+  /* ---------- hero phone: live personal <-> business switch ---------- */
+  var heroPhone = document.querySelector('.hero .phone');
+  var modeTag = document.getElementById('mode-tag');
+  if (heroPhone && modeTag && !reduced) {
+    var personalMode = false;
+    setInterval(function () {
+      personalMode = !personalMode;
+      heroPhone.classList.toggle('show-personal', personalMode);
+      modeTag.textContent = personalMode ? 'Personal phone' : 'Business phone';
+    }, 4500);
+  }
+
+  /* ---------- homepage use-case chip switcher ---------- */
+  var ucChips = document.getElementById('uc-chips');
+  if (ucChips) {
+    var UC = [
+      { k: 'Sales teams', t: 'The customer stays with the company.', x: 'A dedicated business number, WhatsApp Business, CRM and contacts for every rep — without another device.', l: ['Business contacts stay company property', 'Reassign a departing rep’s number in one click', 'Consistent company identity on every touchpoint'], h: 'uc-sales.html' },
+      { k: 'Field service', t: 'The office, in the field.', x: 'Technicians and installers get service apps, work photos and a business number from one secure cloud phone.', l: ['Work-order and CRM apps in the business phone', 'Work photos never mix with personal galleries', 'Remove access remotely when contracts end'], h: 'uc-field.html' },
+      { k: 'Logistics', t: 'Every driver connected. No fleet to manage.', x: 'Drivers and couriers reach customers on business numbers — without a second device in every glovebox.', l: ['Customer communication separated from personal life', 'Proof-of-delivery with the business camera', 'Zero device purchasing and replacement costs'], h: 'uc-logistics.html' },
+      { k: 'Contractors', t: 'Access for the project. Not forever.', x: 'A complete business phone for exactly as long as the engagement lasts — then one click removes it.', l: ['No phones purchased for 3-month engagements', 'Activated the morning the project starts', 'Company data never leaves the business environment'], h: 'uc-contractors.html' },
+      { k: 'Remote & global', t: 'One business identity. Any location.', x: 'Distributed employees get the same business phone wherever they operate — no local hardware, no number chaos.', l: ['Same business phone from any location or device', 'Consistent number across borders', 'International onboarding in minutes'], h: 'uc-remote.html' },
+      { k: 'Government & defense', t: 'Sensitive work. Zero device risk.', x: 'Controlled mobile access for sensitive environments — operational data never touches a personal device.', l: ['Data remains inside the governed environment', 'Temporary personnel activated in minutes', 'On-premises deployment for closed networks'], h: 'uc-government.html' }
+    ];
+    var panel = document.getElementById('uc-panel');
+    var ucT = document.getElementById('ucp-title');
+    var ucX = document.getElementById('ucp-text');
+    var ucL = document.getElementById('ucp-list');
+    var ucA = document.getElementById('ucp-link');
+    function setUC(i, instant) {
+      function apply() {
+        ucT.textContent = UC[i].t;
+        ucX.textContent = UC[i].x;
+        ucL.innerHTML = '';
+        UC[i].l.forEach(function (li) {
+          var el = document.createElement('li');
+          el.textContent = li;
+          ucL.appendChild(el);
+        });
+        ucA.href = UC[i].h;
+        panel.classList.remove('swapping');
+      }
+      ucChips.querySelectorAll('.uc-chip').forEach(function (c, j) {
+        c.classList.toggle('active', i === j);
+        c.setAttribute('aria-selected', i === j ? 'true' : 'false');
+      });
+      if (instant || reduced) { apply(); return; }
+      panel.classList.add('swapping');
+      setTimeout(apply, 200);
+    }
+    UC.forEach(function (u, i) {
+      var b = document.createElement('button');
+      b.className = 'uc-chip';
+      b.type = 'button';
+      b.setAttribute('role', 'tab');
+      b.textContent = u.k;
+      b.addEventListener('click', function () { setUC(i); });
+      ucChips.appendChild(b);
+    });
+    setUC(0, true);
+  }
+
   /* ---------- demo form: conditional segments + submission ----------
      To receive leads by email:
      1. Create a free form at https://formspree.io (Forms → New form,

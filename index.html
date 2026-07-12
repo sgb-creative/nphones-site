@@ -14,7 +14,7 @@
 <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 <link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
 <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
-<link rel="stylesheet" href="assets/style.css?v=6">
+<link rel="stylesheet" href="assets/style.css?v=7">
 </head>
 <body>
 
@@ -56,7 +56,7 @@
     <div>
       <h1>
         <span id="typewriter">Your&nbsp;</span><span class="type-cursor" id="type-cursor"></span>
-        <span class="line2">On one device.</span>
+        <span class="line2">On <span class="h1-token"><span class="tdot"></span>one device</span>.</span>
       </h1>
       <p class="hero-sub">Give every employee a complete cloud business phone on the phone they already carry — a separate number, apps, contacts and files, fully owned and controlled by the company.</p>
       <div class="hero-ctas">
@@ -71,16 +71,34 @@
         <div class="phone-screen">
           <div class="phone-notch"></div>
           <div class="phone-status"><span>10:30</span><span>5G ▮▮▮</span></div>
-          <div class="phone-banner"><span class="dot"></span> NPhones business line · active</div>
-          <div class="phone-apps">
-            <div class="app"><div class="app-ic" style="background:#25D366">W</div>WhatsApp</div>
-            <div class="app"><div class="app-ic" style="background:#EA4335">M</div>Gmail</div>
-            <div class="app"><div class="app-ic" style="background:#0B6B5C">C</div>CRM</div>
-            <div class="app"><div class="app-ic" style="background:#4285F4">K</div>Calendar</div>
-            <div class="app"><div class="app-ic" style="background:#15B097">F</div>Files</div>
-            <div class="app"><div class="app-ic" style="background:#34A853">P</div>Maps</div>
-            <div class="app"><div class="app-ic" style="background:#5F6368">D</div>Drive</div>
-            <div class="app"><div class="app-ic" style="background:#0A66C2">L</div>LinkedIn</div>
+          <div class="phone-body">
+            <div class="phone-mode business">
+              <div class="phone-banner"><span class="dot"></span> NPhones business line · active</div>
+              <div class="phone-apps">
+                <div class="app"><div class="app-ic" style="background:#25D366">W</div>WhatsApp Biz</div>
+                <div class="app"><div class="app-ic" style="background:#EA4335">M</div>Work Gmail</div>
+                <div class="app"><div class="app-ic" style="background:#0B6B5C">C</div>CRM</div>
+                <div class="app"><div class="app-ic" style="background:#4285F4">K</div>Calendar</div>
+                <div class="app"><div class="app-ic" style="background:#15B097">F</div>Org Files</div>
+                <div class="app"><div class="app-ic" style="background:#34A853">P</div>Maps</div>
+                <div class="app"><div class="app-ic" style="background:#5F6368">D</div>Drive</div>
+                <div class="app"><div class="app-ic" style="background:#0A66C2">L</div>LinkedIn</div>
+              </div>
+            </div>
+            <div class="phone-mode personal">
+              <div class="phone-banner"><span class="dot"></span> Personal phone · your private space</div>
+              <div class="phone-apps">
+                <div class="app"><div class="app-ic" style="background:#25D366">W</div>WhatsApp</div>
+                <div class="app"><div class="app-ic" style="background:#FBBC05;color:#4d3c00">Ph</div>Photos</div>
+                <div class="app"><div class="app-ic" style="background:#FF0000">Y</div>YouTube</div>
+                <div class="app"><div class="app-ic" style="background:#E1306C">I</div>Instagram</div>
+                <div class="app"><div class="app-ic" style="background:#1DB954">S</div>Spotify</div>
+                <div class="app"><div class="app-ic" style="background:#5F6368">Ca</div>Camera</div>
+                <div class="app"><div class="app-ic" style="background:#1A73E8">Cl</div>Clock</div>
+                <div class="app"><div class="app-ic" style="background:#34A853">G</div>Games</div>
+              </div>
+            </div>
+            <span class="mode-tag" id="mode-tag">Business phone</span>
           </div>
           <div class="phone-dock">
             <div class="app-ic" style="background:#0B6B5C;width:40px;height:40px;border-radius:13px">✆</div>
@@ -92,6 +110,14 @@
       </div>
       <span class="phone-cta">Click me for interactive demo</span>
       </a>
+    </div>
+    <div class="proof-strip reveal">
+      <span class="plabel">Built by operators from</span>
+      <span class="pitem">Similarweb</span>
+      <span class="pitem">ZoomInfo</span>
+      <span class="pitem">NYSE / ICE</span>
+      <span class="pitem">Spot by NetApp</span>
+      <span class="pitem">Israeli security community</span>
     </div>
   </div>
 </header>
@@ -176,6 +202,26 @@
       <div class="glass stat reveal"><div class="num"><span data-count="30" data-suffix="s">0s</span></div><div class="lbl">Setup time per employee</div></div>
       <div class="glass stat reveal reveal-d1"><div class="num"><span data-count="0">0</span></div><div class="lbl">Traces left on the device</div></div>
       <div class="glass stat reveal reveal-d2"><div class="num"><span data-count="100" data-suffix="%">0%</span></div><div class="lbl">Company ownership of the business line</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ USE-CASE SWITCHER ============ -->
+<section class="section" id="teams">
+  <div class="blobs" aria-hidden="true">
+    <div class="blob sage" data-depth="0.035" style="width:380px;height:380px;top:-110px;right:14%;"><div class="blob-inner"></div></div>
+  </div>
+  <div class="section-inner">
+    <div class="section-head center reveal">
+      <span class="kicker">Use cases</span>
+      <h2>One platform. Every workforce.</h2>
+    </div>
+    <div class="uc-chips reveal" id="uc-chips" role="tablist"></div>
+    <div class="glass uc-panel reveal" id="uc-panel">
+      <h3 id="ucp-title"></h3>
+      <p id="ucp-text"></p>
+      <ul class="check-list" id="ucp-list"></ul>
+      <a class="link-arrow" id="ucp-link" href="#">Explore →</a>
     </div>
   </div>
 </section>
@@ -360,6 +406,6 @@
 </footer>
 
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.18/dist/lenis.min.js"></script>
-<script src="assets/main.js?v=4"></script>
+<script src="assets/main.js?v=7"></script>
 </body>
 </html>
