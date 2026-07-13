@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learn More — NPhones</title>
+<meta name="description" content="Watch how NPhones gives every employee a complete cloud business phone on the device they already carry.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="stylesheet" href="assets/style.css?v=12">
+<style>
+  body { display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+  .demo-top {
+    width: min(1240px, calc(100% - 1.6rem));
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.2rem 0.4rem;
+    flex-wrap: wrap; gap: 10px;
+  }
+  .demo-top a { font-weight: 600; font-size: 14px; color: var(--forest); }
+  .demo-top .hint { font-size: 13px; color: rgba(8,8,8,.55); }
+  .video-stage {
+    position: relative; flex: 1;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    width: min(1100px, calc(100% - 1.6rem));
+    padding-bottom: 2.5rem; gap: 1.4rem;
+  }
+  .video-shell {
+    width: 100%;
+    border-radius: var(--r-lg);
+    overflow: hidden;
+    background: var(--ink);
+    box-shadow: var(--shadow-lift);
+  }
+  .video-shell video { width: 100%; display: block; }
+  .video-caption { text-align: center; }
+  .video-caption h1 { font-size: clamp(1.5rem, 3.4vw, 2.3rem); }
+  .video-caption p { margin: 0.5rem auto 0; color: rgba(8,8,8,.6); font-size: 15.5px; max-width: 52ch; }
+  .vblobs { position: fixed; inset: 0; z-index: -1; overflow: hidden; }
+</style>
+</head>
+<body>
+
+<div class="vblobs" aria-hidden="true">
+  <div class="blob leaf" data-depth="0.04" style="width:420px;height:420px;top:-120px;right:-80px;"><div class="blob-inner"></div></div>
+  <div class="blob sage" data-depth="0.03" style="width:380px;height:380px;bottom:-110px;left:-90px;"><div class="blob-inner"></div></div>
+</div>
+
+<div class="demo-top">
+  <a href="index.html">← Back to NPhones.com</a>
+  <span class="hint">Two and a half minutes — the whole story.</span>
+</div>
+
+<div class="video-stage">
+  <div class="video-caption">
+    <h1>See NPhones in action</h1>
+    <p>How a complete cloud business phone lands on the device your employees already carry.</p>
+  </div>
+  <div class="video-shell">
+    <video src="assets/media/nphones-final.mp4" controls playsinline preload="metadata"></video>
+  </div>
+  <a class="btn btn-primary" href="contact.html#demo">Request a demo</a>
+</div>
+
+<script src="assets/main.js?v=12"></script>
+</body>
+</html>
